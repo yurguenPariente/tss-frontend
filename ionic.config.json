@@ -1,0 +1,7 @@
+{
+  "name": "Plan de Negocio",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
