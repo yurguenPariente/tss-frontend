@@ -2,18 +2,20 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: 'main',
-    loadChildren:() => import('./pages/pages.module').then(m => m.PagesModule),
-  },
+ 
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
     path:'**',
-    redirectTo:'main',
+    redirectTo:'vistas',
+  },
+  {
+    path: 'vistas',
+    loadChildren: () => import('./vistas/vistas.module').then( m => m.VistasPageModule)
   }
+
 ];
 
 @NgModule({
