@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: VistasPage
+  },  {
+    path: 'detallers-proyecto',
+    loadChildren: () => import('./detallers-proyecto/detallers-proyecto.module').then( m => m.DetallersProyectoPageModule)
   }
+
 ];
 
 @NgModule({

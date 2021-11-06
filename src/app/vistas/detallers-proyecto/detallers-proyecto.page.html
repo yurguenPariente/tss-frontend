@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/vistas"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Detalles del proyecto</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <h2 style="padding-left: 25px;">Por favor llene los campos</h2>
+    <ion-row>
+        <ion-col>
+            <ion-card>
+                <ion-card-content>
+                    <ion-input type="text" placeholder="Nombre de la empresa" #nom></ion-input>
+                    <ion-input type="text" placeholder="Representante legal" #rep></ion-input>
+                    <ion-input type="text" placeholder="Direccion de la empresa" #dir></ion-input>
+                    <ion-input type="text" placeholder="NIT" #nit></ion-input>
+                </ion-card-content>
+            </ion-card>
+            <button style="float: right;" mat-flat-button color='primary' (click)="guardarDatos(nom, rep, dir, nit)">Siguiente</button>
+        </ion-col>
+    </ion-row>
+</ion-content>
