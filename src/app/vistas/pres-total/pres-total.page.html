@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Total del presupuesto</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div style="padding-left: 25px;">
+        <h2>El total de su presupuesto</h2>
+        <h2>Aporte propio: xBs. <a style="font-size: small;" (click)="detallesAporte()">Ver detalles</a></h2>
+        <div *ngIf="apFlag">
+            Detalles de aporte propio
+        </div>
+        <h2>Plan de inversion: xBs. <a style="font-size: small;" (click)="detallesInv()">Ver detalles</a><br></h2>
+        <div *ngIf="piFlag">
+            Detalles plan de inversion
+        </div><br>
+        <p>Total del proyecto: 50000 Bs.</p>
+        <p>Aporte propio: 50000 Bs.</p>
+        <p>% de aporte propio: 50000 Bs.</p>
+        <p>Monto a financiar: 50000 Bs.</p>
+
+    </div>
+    <h2 style="padding-left: 25px;">Desembolsos</h2>
+    <ion-row>
+        <ion-col>
+            <ion-card>
+                <ion-card-content>
+                    <ion-input type="number" placeholder="Primer desembolso" #prim></ion-input>
+                    <ion-input type="number" placeholder="Segundo desembolso" #seg></ion-input>
+                </ion-card-content>
+            </ion-card>
+
+        </ion-col>
+    </ion-row>
+    <button style="float: right;" mat-flat-button color='primary'>Siguiente</button>
+
+</ion-content>
