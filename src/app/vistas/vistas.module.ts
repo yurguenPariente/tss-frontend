@@ -18,6 +18,7 @@ import { MaterialModule } from '../material/material.module';
     VistasPageRoutingModule,
     MaterialModule
   ],
-  declarations: [VistasPage]
+  declarations: [VistasPage],
+ 
 })
 export class VistasPageModule {}

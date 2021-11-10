@@ -61,5 +61,6 @@
     </div>
     <h4>Total: {{sumar() | number}}</h4>
   </form>
-  <button mat-flat-button color='primary' class="float-end me-3 mb-3">Siguiente</button>
+  <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="guardar()"
+  [disabled]="miFormulario.invalid" routerLink='/vistas/costos/costos-directos'>Siguiente</button>
 </ion-content>

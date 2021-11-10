@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: CostosPage
+  },
+  {
+    path: 'costos-directos',
+    loadChildren: () => import('./costos-directos/costos-directos.module').then( m => m.CostosDirectosPageModule)
   }
 ];
 
