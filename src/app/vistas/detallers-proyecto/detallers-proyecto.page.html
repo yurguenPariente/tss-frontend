@@ -1,11 +1,11 @@
-<ion-header>
+<ion-header [translucent]="true">
     <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button defaultHref="/vistas"></ion-back-button>
-        </ion-buttons>
-        <ion-title>Detalles del proyecto</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Detalles de la empresa</ion-title>
     </ion-toolbar>
-</ion-header>
+  </ion-header>
 
 <ion-content>
     <h2 style="padding-left: 25px;">Por favor llene los campos</h2>
@@ -19,7 +19,7 @@
                     <ion-input type="text" placeholder="NIT" #nit></ion-input>
                 </ion-card-content>
             </ion-card>
-            <button style="float: right;" mat-flat-button color='primary' (click)="guardarDatos(nom, rep, dir, nit)">Siguiente</button>
+            <button style="float: right;" mat-flat-button color='primary' (click)="guardarDatos(nom, rep, dir, nit)" routerLink='/vistas/costos'>Siguiente</button>
         </ion-col>
     </ion-row>
 </ion-content>
