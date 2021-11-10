@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Total del presupuesto</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div style="padding-left: 25px;">
+        <h2>El total de su presupuesto</h2>
+        <h2>Aporte propio: xBs. <a style="font-size: small;" (click)="detallesAporte()">Ver detalles</a></h2>
+        <div *ngIf="apFlag">
+            Detalles de aporte propio
+        </div>
+        <h2>Plan de inversion: xBs. <a style="font-size: small;" (click)="detallesInv()">Ver detalles</a><br></h2>
+        <div *ngIf="piFlag">
+            Detalles plan de inversion
+        </div><br>
+        <p>Total del proyecto:</p>
+        <p>Aporte propio:</p>
+        <p>% de aporte propio:</p>
+        <p>Monto a financiar:</p>
+
+    </div>
+</ion-content>

@@ -17,10 +17,14 @@ const routes: Routes = [
     loadChildren: () => import('./costos/costos.module').then( m => m.CostosPageModule)
   },
   {
+    path: 'pres-total',
+    loadChildren: () => import('./pres-total/pres-total.module').then( m => m.PresTotalPageModule)
+  },
+  {
     path:'**',
     redirectTo:'detalles'
-  }
-
+  },
+  
 ];
 
 @NgModule({
