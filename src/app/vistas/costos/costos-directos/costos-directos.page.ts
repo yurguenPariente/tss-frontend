@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { ModalController } from '@ionic/angular';
+import { ModalPage } from '../../modal/modal.page';
 
 interface CostosDirectos{
   nombre:string;
@@ -28,10 +29,20 @@ export class CostosDirectosPage implements OnInit {
   displayedColumns: string[] = ['producto', 'tipo', 'cantidad', 'unidad de venta','frecuencia','precio C','precio V'];
   dataSource = datos;
 
-  constructor() { }
+  constructor(public modalCtrl: ModalController) { }
     
   ngOnInit() {
+    if(!localStorage.getItem('servicios')){
+      this.abrirModal();
+    }
+  }
 
+  async abrirModal(){
+    const modal = await this.modalCtrl.create({
+      component: ModalPage
+    })
+    await modal.present();
+   
   }
 
 }
