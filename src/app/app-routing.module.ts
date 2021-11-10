@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
  
   {
-    path: 'folder/:id',
+    path: 'folder',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   }, 
   {
@@ -15,10 +15,6 @@ const routes: Routes = [
   {
     path: 'vistas',
     loadChildren: () => import('./vistas/vistas.module').then( m => m.VistasPageModule)
-  },
-  {
-    path: 'detalles',
-    loadChildren: () => import('./vistas/detallers-proyecto/detallers-proyecto.module').then( m => m.DetallersProyectoPageModule)
   }
 
 ];

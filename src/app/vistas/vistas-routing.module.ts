@@ -7,9 +7,18 @@ const routes: Routes = [
   {
     path: '',
     component: VistasPage
-  },  {
-    path: 'detallers-proyecto',
+  },
+  {
+    path: 'detalles',
     loadChildren: () => import('./detallers-proyecto/detallers-proyecto.module').then( m => m.DetallersProyectoPageModule)
+  },
+  {
+    path: 'costos',
+    loadChildren: () => import('./costos/costos.module').then( m => m.CostosPageModule)
+  },
+  {
+    path:'**',
+    redirectTo:'detalles'
   }
 
 ];
