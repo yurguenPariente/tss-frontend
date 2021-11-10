@@ -19,12 +19,7 @@ const routes: Routes = [
   {
     path:'**',
     redirectTo:'detalles'
-  },  {
-    path: 'modal',
-    loadChildren: () => import('./modal/modal.module').then( m => m.ModalPageModule)
-  }
-
-
+  },
 ];
 
 @NgModule({
