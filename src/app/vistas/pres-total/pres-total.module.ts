@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PresTotalPageRoutingModule } from './pres-total-routing.module';
 
 import { PresTotalPage } from './pres-total.page';
+import { MaterialModule } from 'src/app/material/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PresTotalPageRoutingModule
+    PresTotalPageRoutingModule,
+    MaterialModule
   ],
   declarations: [PresTotalPage]
 })

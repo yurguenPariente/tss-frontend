@@ -18,10 +18,24 @@
         <div *ngIf="piFlag">
             Detalles plan de inversion
         </div><br>
-        <p>Total del proyecto:</p>
-        <p>Aporte propio:</p>
-        <p>% de aporte propio:</p>
-        <p>Monto a financiar:</p>
+        <p>Total del proyecto: 50000 Bs.</p>
+        <p>Aporte propio: 50000 Bs.</p>
+        <p>% de aporte propio: 50000 Bs.</p>
+        <p>Monto a financiar: 50000 Bs.</p>
 
     </div>
+    <h2 style="padding-left: 25px;">Desembolsos</h2>
+    <ion-row>
+        <ion-col>
+            <ion-card>
+                <ion-card-content>
+                    <ion-input type="number" placeholder="Primer desembolso" #prim></ion-input>
+                    <ion-input type="number" placeholder="Segundo desembolso" #seg></ion-input>
+                </ion-card-content>
+            </ion-card>
+
+        </ion-col>
+    </ion-row>
+    <button style="float: right;" mat-flat-button color='primary'>Siguiente</button>
+
 </ion-content>
