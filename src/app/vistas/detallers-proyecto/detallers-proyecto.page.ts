@@ -37,5 +37,6 @@ export class DetallersProyectoPage implements OnInit {
       nit: this.miFormulario.get('nit').value,    
     } 
     console.log(this.proyecto)
+    localStorage.setItem('detallesProyecto',JSON.stringify(this.proyecto));
   }
 }
