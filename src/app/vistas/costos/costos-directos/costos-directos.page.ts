@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { ModalPage } from '../../modal/modal.page';
 
@@ -28,12 +29,31 @@ const datos: CostosDirectos[] = [
 export class CostosDirectosPage implements OnInit {
   displayedColumns: string[] = ['producto', 'tipo', 'cantidad', 'unidad de venta','frecuencia','precio C','precio V'];
   dataSource = datos;
-
-  constructor(public modalCtrl: ModalController) { }
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  nombres: string[] = [];
+  constructor(public modalCtrl: ModalController, private _formBuilder: FormBuilder) { }
     
   ngOnInit() {
-    if(!localStorage.getItem('servicios')){
+    const local = localStorage.getItem('servicios');
+    if(!local){
       this.abrirModal();
+    }else{
+      this.nombres = local.split(',');
+    }
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required],
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required],
+    });
+    
+  }
+
+  crearGrupos(){
+    for(let nom of this.nombres){
+      
     }
   }
 

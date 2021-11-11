@@ -9,7 +9,31 @@
 </ion-header>
 
 <ion-content>
-
+  <h3>Ingrese los datos de los Insumos de cada Producto o Servicio</h3>
+  <mat-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup" *ngFor="let item of nombres">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  
 </ion-content>
 
 
