@@ -16,18 +16,18 @@
         <ng-template matStepLabel>{{item}}</ng-template>
         <h3 class="text-center"><small>Producto o Servicio:</small> {{item | titlecase}}</h3>
         <app-insumos></app-insumos>
-        <div>
-          <button mat-button matStepperNext>Next</button>
+        <div class="mt-2">
+          <button mat-flat-button color="primary" matStepperNext>Ir al siguiente</button>
         </div>
       </form>
     </mat-step>
     
     <mat-step>
       <ng-template matStepLabel>Terminar</ng-template>
-      <p>You are now done.</p>
+      <p>Todo finalizado correctamente!!</p>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
+        <button mat-flat-button color="primary">Siguiente</button>
       </div>
     </mat-step>
   </mat-stepper>
