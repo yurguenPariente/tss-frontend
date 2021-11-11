@@ -30,30 +30,29 @@ export class CostosDirectosPage implements OnInit {
   displayedColumns: string[] = ['producto', 'tipo', 'cantidad', 'unidad de venta','frecuencia','precio C','precio V'];
   dataSource = datos;
   isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  FormGroups: FormGroup[] = [];
   nombres: string[] = [];
   constructor(public modalCtrl: ModalController, private _formBuilder: FormBuilder) { }
     
   ngOnInit() {
     const local = localStorage.getItem('servicios');
+
     if(!local){
       this.abrirModal();
     }else{
       this.nombres = local.split(',');
+      this.crearGrupos();
     }
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
     
   }
 
   crearGrupos(){
     for(let nom of this.nombres){
-      
+      this.FormGroups.push(
+        this._formBuilder.group({
+          name:['', Validators.required]
+        })
+      )
     }
   }
 
