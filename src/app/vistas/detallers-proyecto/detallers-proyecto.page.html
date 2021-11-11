@@ -1,25 +1,33 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Detalles de la empresa</ion-title>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Detalles de la empresa</ion-title>
     </ion-toolbar>
-  </ion-header>
+</ion-header>
 
 <ion-content>
     <h2 style="padding-left: 25px;">Por favor llene los campos</h2>
-    <ion-row>
-        <ion-col>
-            <ion-card>
-                <ion-card-content>
-                    <ion-input type="text" placeholder="Nombre de la empresa" #nom></ion-input>
-                    <ion-input type="text" placeholder="Representante legal" #rep></ion-input>
-                    <ion-input type="text" placeholder="Direccion de la empresa" #dir></ion-input>
-                    <ion-input type="text" placeholder="NIT" #nit></ion-input>
-                </ion-card-content>
-            </ion-card>
-            <button style="float: right;" mat-flat-button color='primary' (click)="guardarDatos(nom, rep, dir, nit)" routerLink='/vistas/costos'>Siguiente</button>
-        </ion-col>
-    </ion-row>
+    <div>
+        <form class="example-form mt-2" [formGroup]="miFormulario">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Nombre de la empresa</mat-label>
+                <input matInput formControlName='nombre'>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Nombre del representante</mat-label>
+                <input matInput formControlName='representante'>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Direccion de la empresa</mat-label>
+                <input matInput formControlName='direccion'>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>NIT de la empresa</mat-label>
+                <input matInput formControlName='nit'>
+            </mat-form-field>
+        </form>
+    </div>
+    <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="guardarDatos()" [disabled]="miFormulario.invalid" routerLink='/vistas/costos'>Siguiente</button>
 </ion-content>
