@@ -5,10 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { CostosDirectosPageRoutingModule } from './costos-directos-routing.module';
-
 import { CostosDirectosPage } from './costos-directos.page';
 import { MaterialModule } from '../../../material/material.module';
-import { VistasPageModule } from '../../vistas.module';
+import { CostosPageModule } from '../costos.module';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
@@ -17,7 +17,8 @@ import { VistasPageModule } from '../../vistas.module';
     IonicModule,
     CostosDirectosPageRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ],
   declarations: [CostosDirectosPage]
 })

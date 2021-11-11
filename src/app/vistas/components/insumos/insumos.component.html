@@ -1,0 +1,88 @@
+<form [formGroup]="miFormulario">
+  <div class="row">
+    <div class="col-4">
+      <small>Tipo</small>
+      <mat-form-field class="example-full-width col1" appearance="fill">
+        <mat-label>Tipo</mat-label>
+        <input type="text" matInput>
+      </mat-form-field>
+    </div>
+    <div class="col-4">
+      <small>Cantidad</small>
+      <mat-form-field class="example-full-width col1" appearance="fill">
+        <mat-label>Cantidad</mat-label>
+        <input type="number" min="0" value="0" matInput>
+      </mat-form-field>
+    </div>
+    <div class="col-4">
+      <small>Unidad de venta</small>
+      <mat-form-field class="example-full-width col1" appearance="fill">
+        <mat-label>Unidad de venta</mat-label>
+        <input type="text" matInput>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <small>Frecuencia</small>
+      <mat-form-field appearance="fill" class="col1">
+        <mat-label>Frecuencia</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let opcion of opciones" [value]="opcion.value">
+            {{opcion.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <small>Precio de Venta</small>
+      <mat-form-field class="example-full-width col1" appearance="fill">
+        <mat-label>Precio de Venta</mat-label>
+        <input type="text" matInput>
+      </mat-form-field>
+    </div>
+  </div>
+  <small>Insumos</small>
+      <mat-form-field class="example-full-width col1" appearance="fill">
+        <mat-label>Cantidad de insumos</mat-label>
+        <input type="number" min="1" matInput formControlName='cantidad2' (change)="llenarArreglo()">
+      </mat-form-field>
+      <div *ngFor="let num of arreglo; let i = index">
+        <div class="row">
+          <small>Insumo {{i+1}}</small>
+          <div class="col-6">
+            <mat-form-field class="example-full-width col1" appearance="fill">
+              <mat-label>Insumo</mat-label>
+              <input type="text" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="example-full-width col1" appearance="fill">
+              <mat-label>Cantidad</mat-label>
+              <input type="number" min="1" max="5" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <mat-form-field class="example-full-width col1" appearance="fill">
+              <mat-label># de unidades</mat-label>
+              <input type="number" min="1" value="1" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field class="example-full-width col1" appearance="fill">
+              <mat-label>Precio Unitario</mat-label>
+              <input type="number" min="1" value='1' matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <p>Total:</p>
+            <p>0</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        Total Costo: 0
+      </div>
+</form>
