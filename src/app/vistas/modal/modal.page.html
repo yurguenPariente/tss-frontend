@@ -16,11 +16,10 @@
       <mat-form-field appearance="fill">
         <mat-label>Productos o Servicios</mat-label>
         <input matInput type="number"  min="1" (change)="cargarCampos()" formControlName='cantidad'>
-        <mat-error>Min size: 10px</mat-error>
       </mat-form-field>
       <h4>Ingrese los nombre de los productos o servicios</h4>
       <div formArrayName='servicios'>
-        <mat-form-field appearance="fill" *ngFor="let nom of numbers; index as i">
+        <mat-form-field appearance="fill" *ngFor="let item of numbers; let i=index">
           <mat-label >Producto o Servicio</mat-label>
           <input matInput [formControlName]="i">
         </mat-form-field>

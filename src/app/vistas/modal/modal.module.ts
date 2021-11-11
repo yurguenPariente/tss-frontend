@@ -8,6 +8,7 @@ import { ModalPageRoutingModule } from './modal-routing.module';
 
 import { ModalPage } from './modal.page';
 import { MaterialModule } from '../../material/material.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [

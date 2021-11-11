@@ -9,6 +9,10 @@ const routes: Routes = [
     component: VistasPage
   },
   {
+    path:'modal',
+    loadChildren: () => import('./modal/modal.module').then(m => m.ModalPageModule)
+  },
+  {
     path: 'detalles',
     loadChildren: () => import('./detallers-proyecto/detallers-proyecto.module').then( m => m.DetallersProyectoPageModule)
   },
