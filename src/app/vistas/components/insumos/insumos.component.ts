@@ -21,7 +21,7 @@ export class InsumosComponent implements OnInit {
     {value:0.1666666667,viewValue:'Semestral'},
   ];
   arreglo: number[]=[];
-
+  totales: number[] = [];
   miFormulario: FormGroup = this.fb.group({
     cantidad2: new FormControl(1,Validators.required),
     tipo: new FormControl('', Validators.required),
@@ -50,17 +50,13 @@ export class InsumosComponent implements OnInit {
   modificarArreglo(){
     if(this.insumos.length > this.miFormulario.get('cantidad2').value){
       this.eliminar();
-      console.log(this.insumos.value);
     }else{
       this.addInsumo();
-      console.log(this.insumos.value);
-
     }
 
   }
 
   addInsumo(){
-
       const insumo = this.fb.group({
       insumo:new FormControl('', Validators.required),
       cantidad:new FormControl(0,Validators.required),
@@ -72,4 +68,13 @@ export class InsumosComponent implements OnInit {
   eliminar(){
     this.insumos.removeAt(this.insumos.length-1);
   }
+
+  anadirTotal(indice: number): number{
+    // return(this.insumos[indice].get('cantidad').value/this.insumos[indice].get('unidadesProd'))*this.insumos[indice].get('precioU');
+    const cantidad = Number(this.insumos.value[indice].cantidad);
+    const unidades = Number(this.insumos.value[indice].unidadesProd);
+    const precio = Number(this.insumos.value[indice].precioU);
+    return (cantidad/unidades)*precio;
+  }
+
 }
