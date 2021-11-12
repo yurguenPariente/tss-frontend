@@ -4,21 +4,21 @@
       <small>Tipo</small>
       <mat-form-field class="example-full-width col1" appearance="fill">
         <mat-label>Tipo</mat-label>
-        <input type="text" matInput>
+        <input type="text" matInput formControlName='tipo'>
       </mat-form-field>
     </div>
     <div class="col-4">
       <small>Cantidad</small>
       <mat-form-field class="example-full-width col1" appearance="fill">
         <mat-label>Cantidad</mat-label>
-        <input type="number" min="0" value="0" matInput>
+        <input type="number" min="0" value="0" matInput formControlName='cantidad1'>
       </mat-form-field>
     </div>
     <div class="col-4">
       <small>Unidad de venta</small>
       <mat-form-field class="example-full-width col1" appearance="fill">
         <mat-label>Unidad de venta</mat-label>
-        <input type="text" matInput>
+        <input type="text" matInput formControlName='unidadV'>
       </mat-form-field>
     </div>
   </div>
@@ -27,7 +27,7 @@
       <small>Frecuencia</small>
       <mat-form-field appearance="fill" class="col1">
         <mat-label>Frecuencia</mat-label>
-        <mat-select>
+        <mat-select formControlName='frecuencia'>
           <mat-option *ngFor="let opcion of opciones" [value]="opcion.value">
             {{opcion.viewValue}}
           </mat-option>
@@ -38,7 +38,7 @@
       <small>Precio de Venta</small>
       <mat-form-field class="example-full-width col1" appearance="fill">
         <mat-label>Precio de Venta</mat-label>
-        <input type="text" matInput>
+        <input type="text" matInput formControlName='precioV'>
       </mat-form-field>
     </div>
   </div>
@@ -87,7 +87,10 @@
           </div>
         </div>
       </div>
-      <div>
-        Total Costo: 0
-      </div>
 </form>
+<div class="mt-2">
+  <button mat-flat-button color="primary" class="me-2"
+  matStepperPrevious (click)="guardarDatos()">Atras</button>
+  <button mat-flat-button color="primary" matStepperNext (click)="guardarDatos()"
+  class="float-end" [disabled]="miFormulario.invalid">Ir al siguiente</button>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormGroup,Validators, FormArray, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal',
@@ -11,7 +12,7 @@ export class ModalPage implements OnInit {
   nombres: string[] = [];
   numbers:number[]=[];
   items: FormArray;
-  constructor(public modalCtrl: ModalController, private fb:FormBuilder) { }
+  constructor(public modalCtrl: ModalController, private router: Router) { }
   // miFormulario: FormGroup = this.fb.group({
   //   cantidad:[1,[Validators.required, Validators.min(1)]],
   //   servicios:this.fb.array([this.createItem()])
@@ -63,6 +64,7 @@ export class ModalPage implements OnInit {
     this.pasar();
     localStorage.setItem('servicios',this.nombres.toString());
     this.close();
+    window.location.reload();
   }
 
 }

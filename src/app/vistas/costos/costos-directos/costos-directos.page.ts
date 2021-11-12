@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { ModalPage } from '../../modal/modal.page';
+import { CostosService } from '../../services/costos.service';
 
 interface CostosDirectos{
   nombre:string;
@@ -26,26 +27,37 @@ const datos: CostosDirectos[] = [
   templateUrl: './costos-directos.page.html',
   styleUrls: ['./costos-directos.page.scss'],
 })
-export class CostosDirectosPage implements OnInit {
+export class CostosDirectosPage implements OnInit{
+  totalVentas: number = 0;
+  totalCosto: number = 0;
+  mub:number = this.costosService.sumarMub();
   displayedColumns: string[] = ['producto', 'tipo', 'cantidad', 'unidad de venta','frecuencia','precio C','precio V'];
   dataSource = datos;
   isLinear = false;
   FormGroups: FormGroup[] = [];
   nombres: string[] = [];
-  constructor(public modalCtrl: ModalController, private _formBuilder: FormBuilder) { }
+  constructor(public modalCtrl: ModalController, private _formBuilder: FormBuilder, private costosService:CostosService) { }
     
   ngOnInit() {
-    const local = localStorage.getItem('servicios');
+   this.modal();
+   this.totales();
+  }
 
+  modal(){
+    const local = localStorage.getItem('servicios');
     if(!local){
       this.abrirModal();
     }else{
       this.nombres = local.split(',');
       this.crearGrupos();
     }
-    
   }
-
+  totales(){
+    if(localStorage.getItem('ventasMes') && localStorage.getItem('costosDirectos')){
+      this.totalVentas = JSON.parse(localStorage.getItem('ventasMes')).total;
+      this.mub = JSON.parse(localStorage.getItem('costosDirectos')).mubTotal*100; 
+    }
+  }
   crearGrupos(){
     for(let nom of this.nombres){
       this.FormGroups.push(
@@ -62,6 +74,10 @@ export class CostosDirectosPage implements OnInit {
     })
     await modal.present();
    
+  }
+
+  guardarLocal(){
+    this.costosService.Guardar();
   }
 
 }

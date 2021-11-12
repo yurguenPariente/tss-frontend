@@ -5,29 +5,47 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Costos Directos</ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h4 class="p-2 text-center" >Ingrese los datos de los Insumos de cada Producto o Servicio</h4>
   <mat-stepper #stepper>
     <mat-step [stepControl]="FormGroups[i]" *ngFor="let item of nombres; let i = index">
       <form [formGroup]="FormGroups[i]">
         <ng-template matStepLabel>{{item}}</ng-template>
         <h3 class="text-center"><small>Producto o Servicio:</small> {{item | titlecase}}</h3>
-        <app-insumos></app-insumos>
-        <div class="mt-2">
-          <button mat-flat-button color="primary" matStepperNext>Ir al siguiente</button>
-        </div>
+        <app-insumos [indice]="i"></app-insumos>
       </form>
     </mat-step>
     
     <mat-step>
       <ng-template matStepLabel>Terminar</ng-template>
       <p>Todo finalizado correctamente!!</p>
+      <small>Totales</small>
+      <div class="row">
+        <div class="col-4">
+          <small>Ventas Anual</small>
+          <div class="alert alert-danger">
+            {{totalVentas | number}}
+          </div>
+        </div>
+        <div class="col-4">
+          <small>Costos de produccion anuales</small>
+          <div class="alert alert-danger">
+            {{totalCosto}}
+          </div>
+        </div>
+        <div class="col-4">
+          <small>MUB Total</small>
+          <div class="alert alert-danger">
+            {{mub | number: '1.2-2'}} %
+          </div>
+        </div>
+      </div>
       <div>
         <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
-        <button mat-flat-button color="primary">Siguiente</button>
+        <button mat-flat-button color="primary" (click)="guardarLocal()" class="float-end">Siguiente</button>
       </div>
     </mat-step>
   </mat-stepper>
