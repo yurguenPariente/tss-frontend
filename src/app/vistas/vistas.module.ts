@@ -8,6 +8,7 @@ import { VistasPageRoutingModule } from './vistas-routing.module';
 
 import { VistasPage } from './vistas.page';
 import { MaterialModule } from '../material/material.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({

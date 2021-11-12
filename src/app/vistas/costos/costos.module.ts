@@ -8,7 +8,6 @@ import { CostosPageRoutingModule } from './costos-routing.module';
 
 import { CostosPage } from './costos.page';
 import { MaterialModule } from '../../material/material.module';
-import { FolderPageModule } from '../../folder/folder.module';
 
 @NgModule({
   imports: [
@@ -20,5 +19,6 @@ import { FolderPageModule } from '../../folder/folder.module';
     ReactiveFormsModule
   ],
   declarations: [CostosPage]
+
 })
 export class CostosPageModule {}
