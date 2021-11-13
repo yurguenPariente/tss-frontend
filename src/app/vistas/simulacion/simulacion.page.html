@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Simulacion</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <h2 style="padding-left: 25px;">Por favor llene los campos</h2>
+    <div>
+        <form class="example-form mt-2" [formGroup]="miFormulario">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Inversion inicial</mat-label>
+                <input matInput formControlName='invInicial'>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Ganancias del primer año</mat-label>
+                <input matInput formControlName='ganancias'>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Salarios</mat-label>
+                <input matInput formControlName='salarios'>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Gastos generales</mat-label>
+                <input matInput formControlName='gastosBasicos'>
+            </mat-form-field>
+        </form>
+    </div>
+    <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="simular()" [disabled]="miFormulario.invalid">Simular</button><br>
+    <h2 style="padding-left: 25px;">{{ resultados }}</h2>
+</ion-content>

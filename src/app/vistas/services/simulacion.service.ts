@@ -21,7 +21,7 @@ export class SimulacionService {
 
       for (let j = 0; j < 8; j++) {
         r = Math.random();
-        console.log("Random "+r);
+        //console.log("Random "+r);
 
         flujos.push(ganancias-impuestos-salarios-gastosGenerales);
 
@@ -42,6 +42,9 @@ export class SimulacionService {
     console.log("Despues de ejecutar la simulacion 1000 veces se obtuvo los siguientes resultados");
     console.log("Veces que el proyecto fue rentable: "+rentables+ "("+Math.ceil(rentables / 10)+"%).");
     console.log("Veces que el proyecto no fue rentable: "+perdidas+ "("+ Math.ceil(perdidas / 10)+"%).");
+
+    return ("Veces que el proyecto fue rentable: "+rentables+ "("+Math.ceil(rentables / 10)+"%).")+  
+    "Veces que el proyecto no fue rentable: "+perdidas+ "("+ Math.ceil(perdidas / 10)+"%).";
 
   }
 
