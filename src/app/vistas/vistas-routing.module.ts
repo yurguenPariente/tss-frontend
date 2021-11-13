@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -7,10 +8,6 @@ const routes: Routes = [
   {
     path: '',
     component: VistasPage
-  },
-  {
-    path:'modal',
-    loadChildren: () => import('./modal/modal.module').then(m => m.ModalPageModule)
   },
   {
     path: 'detalles',
@@ -25,6 +22,14 @@ const routes: Routes = [
     loadChildren: () => import('./pres-total/pres-total.module').then( m => m.PresTotalPageModule)
   },
   {
+    path: 'flujo',
+    loadChildren: () => import('./flujo/flujo.module').then( m => m.FlujoPageModule)
+  },
+  {
+    path: 'costo-opera',
+    loadChildren: () => import('./costo-opera/costo-opera.module').then( m => m.CostoOperaPageModule)
+  },  
+  {
     path: 'simulacion',
     loadChildren: () => import('./simulacion/simulacion.module').then( m => m.SimulacionPageModule)
   },
@@ -32,6 +37,8 @@ const routes: Routes = [
     path:'**',
     redirectTo:'detalles'
   },
+ 
+
   
 
 ];
