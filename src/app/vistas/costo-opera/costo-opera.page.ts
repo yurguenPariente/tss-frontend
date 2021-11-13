@@ -11,7 +11,7 @@ import { CostoOp } from 'src/app/interfaces/CostoOper';
 export class CostoOperaPage implements OnInit {
   CostoOp: CostoOp = {
     Impuestos: 0,
-    Alimentación: 0,
+    Alimentacion: 0,
     ServiciodeLuz: 0,
     ServiciodeAgua: 0,
     ServiciodeGas: 0,
@@ -29,7 +29,7 @@ export class CostoOperaPage implements OnInit {
   }
   miFormulario: FormGroup= this.fb.group({
     Impuestos: [ 0, [Validators.required, Validators.max(1000000)]],
-    Alimentación: [0, [Validators.required, Validators.max(1000000)]],
+    Alimentacion: [0, [Validators.required, Validators.max(1000000)]],
    ServiciodeLuz: [ 0, [Validators.required, Validators.max(1000000)]],
     ServiciodeAgua:[ 0, [Validators.required, Validators.max(1000000)]],
    ServiciodeGas: [ 0, [Validators.required, Validators.max(1000000)]],
@@ -56,12 +56,12 @@ export class CostoOperaPage implements OnInit {
      
   }
    sumar():number{
-     return Number(this.miFormulario.get('Impuestos').value) + Number(this.miFormulario.get('Alimentación').value)+
+     return Number(this.miFormulario.get('Impuestos').value) + Number(this.miFormulario.get('Alimentacion').value)+
      Number(this.miFormulario.get('ServiciodeLuz').value) +Number(this.miFormulario.get('ServiciodeAgua').value) +
-     Number(this.miFormulario.get(' ServiciodeGas').value) +Number(this.miFormulario.get('ServiciodeTelefono').value) 
-     +Number(this.miFormulario.get('ServiciodeInternet').value) +Number(this.miFormulario.get(' Alquiler').value) 
+     Number(this.miFormulario.get('ServiciodeGas').value) +Number(this.miFormulario.get('ServiciodeTelefono').value) 
+     +Number(this.miFormulario.get('ServiciodeInternet').value) +Number(this.miFormulario.get('Alquiler').value) 
      +Number(this.miFormulario.get('Transporte').value) +Number(this.miFormulario.get('MaterialdeEscritorio').value) 
-     +Number(this.miFormulario.get(' PagoaEmpleados').value) +Number(this.miFormulario.get('Promoción').value) 
+     +Number(this.miFormulario.get('PagoaEmpleados').value) +Number(this.miFormulario.get('Promoción').value) 
      +Number(this.miFormulario.get('Mantenimiento').value) +Number(this.miFormulario.get('Vestimenta').value) 
      +Number(this.miFormulario.get('Salud').value)  
    }

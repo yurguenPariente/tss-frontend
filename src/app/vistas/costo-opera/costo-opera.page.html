@@ -45,21 +45,21 @@
             
             <input type="number" min="0" value="0" matInput formControlName='Impuestos'>
             
-            <input type="number" min="0" value="0" matInput formControlName=' Alimentación'>
-            <input type="number" min="0" value="0" matInput formControlName=' ServiciodeLuz'>
+            <input type="number" min="0" value="0" matInput formControlName='Alimentacion'>
+            <input type="number" min="0" value="0" matInput formControlName='ServiciodeLuz'>
 
             <input type="number" min="0" value="0" matInput formControlName='ServiciodeAgua'>
-            <input type="number" min="0" value="0" matInput formControlName=' ServiciodeGas'>
-            <input type="number" min="0" value="0" matInput formControlName=' ServiciodeTelefono'>
-            <input type="number" min="0" value="0" matInput formControlName=' ServiciodeInternet'>
-            <input type="number" min="0" value="0" matInput formControlName=' Alquiler'>
-            <input type="number" min="0" value="0" matInput formControlName=' Transporte'>
+            <input type="number" min="0" value="0" matInput formControlName='ServiciodeGas'>
+            <input type="number" min="0" value="0" matInput formControlName='ServiciodeTelefono'>
+            <input type="number" min="0" value="0" matInput formControlName='ServiciodeInternet'>
+            <input type="number" min="0" value="0" matInput formControlName='Alquiler'>
+            <input type="number" min="0" value="0" matInput formControlName='Transporte'>
             <input type="number" min="0" value="0" matInput formControlName='MaterialdeEscritorio'>
             <input type="number" min="0" value="0" matInput formControlName='PagoaEmpleados'>
-            <input type="number" min="0" value="0" matInput formControlName=' Promoción'>
-            <input type="number" min="0" value="0" matInput formControlName=' Mantenimiento'>
-            <input type="number" min="0" value="0" matInput formControlName=' Vestimenta'>
-            <input type="number" min="0" value="0" matInput formControlName=' Salud'>
+            <input type="number" min="0" value="0" matInput formControlName='Promoción'>
+            <input type="number" min="0" value="0" matInput formControlName='Mantenimiento'>
+            <input type="number" min="0" value="0" matInput formControlName='Vestimenta'>
+            <input type="number" min="0" value="0" matInput formControlName='Salud'>
            
             <h4>Total: {{sumar() | number}}</h4>
             <p></p>
@@ -67,8 +67,7 @@
 
       </ion-col>
     </ion-row>
-    <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="guardar()"
-    [disabled]="miFormulario.invalid" routerLink='/vistas/costo-opera'>Siguiente</button>
+    
     
   </ion-grid>
  

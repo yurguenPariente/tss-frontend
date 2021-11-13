@@ -1,7 +1,7 @@
 export interface CostoOp{
 
         Impuestos:number;  
-        Alimentación :number;  
+        Alimentacion :number;  
 ServiciodeLuz:number;
 ServiciodeAgua:number;
 ServiciodeGas:number;
