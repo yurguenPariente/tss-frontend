@@ -25,6 +25,7 @@ const routes: Routes = [
     path: 'presupuesto',
     loadChildren: () => import('./presupuesto/presupuesto.module').then( m => m.PresupuestoPageModule)
   },
+  {
     path: 'flujo',
     loadChildren: () => import('./flujo/flujo.module').then( m => m.FlujoPageModule)
   },
