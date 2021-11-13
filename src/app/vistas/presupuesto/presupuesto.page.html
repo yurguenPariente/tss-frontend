@@ -89,7 +89,7 @@
       </form>
       <div class="mb-3">Total: {{sumarTotal1() | number}}</div>
       <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
-      <button mat-flat-button color="primary" class="float-end">Siguiente</button>
+      <button mat-flat-button color="primary" class="float-end" matStepperNext (click)="guardarEfectivo()">Siguiente</button>
     </mat-step>
     
     <mat-step>
@@ -122,14 +122,54 @@
       </div>
       <div class="mb-3">Total: 0</div>
         <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
-        <button mat-flat-button color="primary" class="float-end" (click)="guardar()">Siguiente</button>
+        <button mat-flat-button color="primary" class="float-end" matStepperNext>Siguiente</button>
+    </mat-step>
+
+    <mat-step>
+      <h3 class="text-center"><small>Capital de Inversion</small></h3>
+      <ng-template matStepLabel>Capital Operativo</ng-template>
+      <div>
+        <h5>Infraestructura</h5>
+        <small>Detalle 1</small>
+        <app-capital tipo="infra" [indice]="0"></app-capital>
+        <small>Detalle 2</small>
+        <app-capital tipo="infra" [indice]='1'></app-capital>
+        <small>Detalle 3</small>
+        <app-capital tipo="infra" [indice]='2'></app-capital>
+      </div>
+      <div>
+        <h5>Maquinaria, Equipos, Vehiculos y/o Ganado</h5>
+        <small>Detalle 1</small>
+        <app-capital [indice]='0' tipo="maqui"></app-capital>
+        <small>Detalle 2</small>
+        <app-capital [indice]='1' tipo="maqui"></app-capital>
+        <small>Detalle 3</small>
+        <app-capital [indice]='2' tipo="maqui"></app-capital>
+        <small>Detalle 4</small>
+        <app-capital [indice]='3' tipo="maqui"></app-capital>
+        <small>Detalle 5</small>
+        <app-capital [indice]='4' tipo="maqui"></app-capital>
+      </div>
+      <div>
+        <h5>Requerimientos legales</h5>
+        <small>Requerimiento 1</small>
+        <app-capital [indice]='0' tipo="legales"></app-capital>
+        <small>Requerimiento 2</small>
+        <app-capital [indice]='1' tipo="legales"></app-capital>
+        <small>Requerimiento 3</small>
+        <app-capital [indice]='2' tipo="legales"></app-capital>
+      </div>
+
+      <div class="mb-3">Total: 0</div>
+        <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
+        <button mat-flat-button color="primary" class="float-end" matStepperNext>Siguiente</button>
     </mat-step>
 
     <mat-step>
       <ng-template matStepLabel>Terminar</ng-template>
       <p>Todo finalizado correctamente!!</p>
         <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
-        <button mat-flat-button color="primary" class="float-end">Siguiente</button>
+        <button mat-flat-button color="primary" class="float-end" (click)="guardar()">Guardar y Continuar</button>
     </mat-step>
   </mat-stepper>
   

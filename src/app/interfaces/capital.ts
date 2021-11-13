@@ -5,27 +5,30 @@ export interface Presupuesto{
 }
 
 export interface DetalleEfectivo{
-    tipo:string;
     detalle:string;
     procedencia:string;
-    aporte:string
+    aporte:number
 }
 export interface Efectivo{
     total:number;
-    detalle:DetalleEfectivo
+    detalle:DetalleEfectivo[]
 }
 export interface CapitalOperativo{
-    manoObra: Detalle[];
-    prima:Detalle[];
-    promocion:Detalle[];
-    operativos:Detalle[];
-    total:number
+    manoObra: CapitalO;
+    prima:CapitalO;
+    promocion:CapitalO;
+    operativos:CapitalO;
 }
+export interface CapitalO{
+    detalles:Detalle[],
+    totalInvertido:number,
+    totalPropio:number
+}
+
 export interface CapitalInversion{
-    infraestructura:Detalle[];
-    maquinaria:Detalle[];
-    legales:Detalle[];
-    total:number
+    infraestructura:CapitalO;
+    maquinaria:CapitalO;
+    legales:CapitalO;
 }
 export interface Detalle{
     cantidad:number;
