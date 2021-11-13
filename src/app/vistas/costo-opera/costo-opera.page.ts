@@ -27,8 +27,8 @@ export class CostoOperaPage implements OnInit {
     Salud: 0,
     total: 0
   }
-  //miFormulario: FormGroup;
-  constructor() { }
+  miFormulario: FormGroup = this.fb.group({});
+  constructor(private fb: FormBuilder) { }
   // constructor() { }
 
   ngOnInit() {
