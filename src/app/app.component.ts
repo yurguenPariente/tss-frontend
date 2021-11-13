@@ -8,6 +8,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Home', url: '/vistas', icon:'home'},
     { title: 'Detalles de la empresa', url: '/vistas/detalles', icon: 'mail' },
+    { title: 'Presupuesto', url: '/vistas/presupuesto', icon: 'warning' },
     { title: 'Costos', url: '/vistas/costos', icon: 'paper-plane' },
     { title: 'Costos Directos', url: '/vistas/costos/costos-directos', icon: 'heart' },
     { title: 'Flujo', url: '/vistas/flujo/' },

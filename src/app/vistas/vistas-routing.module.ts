@@ -22,6 +22,9 @@ const routes: Routes = [
     loadChildren: () => import('./pres-total/pres-total.module').then( m => m.PresTotalPageModule)
   },
   {
+    path: 'presupuesto',
+    loadChildren: () => import('./presupuesto/presupuesto.module').then( m => m.PresupuestoPageModule)
+  },
     path: 'flujo',
     loadChildren: () => import('./flujo/flujo.module').then( m => m.FlujoPageModule)
   },
@@ -36,10 +39,7 @@ const routes: Routes = [
   {
     path:'**',
     redirectTo:'detalles'
-  },
- 
-
-  
+  }
 
 ];
 
