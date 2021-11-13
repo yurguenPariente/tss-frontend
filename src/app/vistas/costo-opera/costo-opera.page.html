@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content padding>
+  <form class="example-form mt-2" [formGroup]="miFormulario">
   <ion-grid [fixed]="true">
     <ion-row>
       <ion-col>
@@ -32,7 +33,7 @@
     
     
       <ion-col>
-       <P> NEGOCIO</P>
+       <p> NEGOCIO</p>
        <p>Numero 1 : <input type="number" ng-model="n1"></p>
      <p>Numero 2 : <input type="number" ng-model="n2"></p>
      <p>Numero 3 : <input type="number" ng-model="n3"></p>
@@ -54,5 +55,5 @@
     </ion-row>
     
   </ion-grid>
-  
+</form>
 </ion-content>
