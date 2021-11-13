@@ -9,7 +9,6 @@ export class CostosService {
 
   constructor() { }
 
-  arregloInsumos: Insumo[] = [];
   arregloProductos: Producto[] = [];
   costosDirectos: CostosDirectos = {
     productos: this.arregloProductos,

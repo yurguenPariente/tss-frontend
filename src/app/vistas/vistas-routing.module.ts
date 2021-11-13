@@ -25,9 +25,15 @@ const routes: Routes = [
     loadChildren: () => import('./pres-total/pres-total.module').then( m => m.PresTotalPageModule)
   },
   {
+    path: 'presupuesto',
+    loadChildren: () => import('./presupuesto/presupuesto.module').then( m => m.PresupuestoPageModule)
+  },
+  {
     path:'**',
     redirectTo:'detalles'
-  },
+  }
+  
+
 ];
 
 @NgModule({

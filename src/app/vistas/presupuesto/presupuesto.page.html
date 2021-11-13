@@ -1,0 +1,136 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Presupuesto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <mat-stepper #stepper>
+    <mat-step >
+      <form [formGroup]="form1">
+        <ng-template matStepLabel>Presupuesto</ng-template>
+        <h3 class="text-center"><small>Con que efectivo cuenta?</small></h3>
+        <div class="row">
+          <h3>Efectivo/Origen</h3>
+          <div class="col-5">
+            <small>Detalle del efectivo</small>
+            <mat-form-field appearance="fill">
+              <mat-label>Detalle</mat-label>
+              <input matInput type="text" formControlName='detalleEfectivo'>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <small>Procedencia</small>
+            <mat-form-field appearance="fill">
+              <mat-label>Procedencia</mat-label>
+              <input matInput type="text" formControlName='procedenciaEfectivo'>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <small>Aporte propio</small>
+            <mat-form-field appearance="fill">
+              <mat-label>Aporte propio</mat-label>
+              <input matInput type="number"  min="0" formControlName='aporteEfectivo'>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <h3>Caja de Ahorro/Entidad Financiera</h3>
+          <div class="col-5">
+            <small>Detalle entidad financiera</small>
+            <mat-form-field appearance="fill">
+              <mat-label>Detalle</mat-label>
+              <input matInput type="text" formControlName='detalleEntidad'>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <small>Procedencia</small>
+            <mat-form-field appearance="fill">
+              <mat-label>Procedencia</mat-label>
+              <input matInput type="text" formControlName='procedenciaEntidad'>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <small>Aporte propio</small>
+            <mat-form-field appearance="fill">
+              <mat-label>Aporte propio</mat-label>
+              <input matInput type="number"  min="0" formControlName='aporteEntidad'>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <h3>Otros</h3>
+          <div class="col-5">
+            <small>Detalle</small>
+            <mat-form-field appearance="fill">
+              <mat-label>Detalle</mat-label>
+              <input matInput type="text" formControlName='detalleOtros'>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <small>Procedencia</small>
+            <mat-form-field appearance="fill">
+              <mat-label>Procedencia</mat-label>
+              <input matInput type="text" formControlName='procedenciaOtros'>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <small>Aporte propio</small>
+            <mat-form-field appearance="fill">
+              <mat-label>Aporte propio</mat-label>
+              <input matInput type="number"  min="0" formControlName='aporteOtros'>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <div class="mb-3">Total: {{sumarTotal1() | number}}</div>
+      <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
+      <button mat-flat-button color="primary" class="float-end">Siguiente</button>
+    </mat-step>
+    
+    <mat-step>
+      <h3 class="text-center"><small>Capital Operativo</small></h3>
+      <ng-template matStepLabel>Capital Operativo</ng-template>
+      <div>
+        <h5>Mano de obra</h5>
+        <app-capital [inversion]="false" tipo="mano"></app-capital>
+      </div>
+      <div>
+        <h5>Materia prima, insumos y/o animales de engorde</h5>
+        <small>Detalle 1</small>
+        <app-capital [indice]='0' tipo="prima"></app-capital>
+        <small>Detalle 2</small>
+        <app-capital [indice]='1' tipo="prima"></app-capital>
+        <small>Detalle 3</small>
+        <app-capital [indice]='2' tipo="prima"></app-capital>
+      </div>
+      <div>
+        <h5>Requerimientos promocionales</h5>
+        <small>Requerimiento 1</small>
+        <app-capital [indice]='0' tipo="promocion"></app-capital>
+        <small>Requerimiento 2</small>
+        <app-capital [indice]='1' tipo="promocion"></app-capital>
+      </div>
+      <div>
+        <h5>Gastos operativos</h5>
+        <app-capital [indice]='0' [aporte]='false' tipo="operativos"></app-capital>
+        <app-capital [indice]='1' [aporte]="false" tipo="operativos"></app-capital>
+      </div>
+      <div class="mb-3">Total: 0</div>
+        <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
+        <button mat-flat-button color="primary" class="float-end" (click)="guardar()">Siguiente</button>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Terminar</ng-template>
+      <p>Todo finalizado correctamente!!</p>
+        <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
+        <button mat-flat-button color="primary" class="float-end">Siguiente</button>
+    </mat-step>
+  </mat-stepper>
+  
+</ion-content>
