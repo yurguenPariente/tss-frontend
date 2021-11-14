@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PresupuestoService } from '../services/presupuesto.service';
 import { SimulacionService } from '../services/simulacion.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class SimulacionPage implements OnInit {
     gastosBasicos:0
   }
   
-  constructor(private fb: FormBuilder, private simularService: SimulacionService) { }
+  constructor(private fb: FormBuilder, private simularService: SimulacionService, private presupuestoService: PresupuestoService) { }
 
   ngOnInit() {
     this.miFormulario = this.fb.group({
@@ -28,6 +29,12 @@ export class SimulacionPage implements OnInit {
       salarios:[this.proyecto.salarios,[Validators.required]],      
       gastosBasicos:[this.proyecto.gastosBasicos,[Validators.required]],      
     })
+    this.getDatosPresupuesto();
+  }
+
+  getDatosPresupuesto(){
+    let pres = JSON.parse(localStorage.getItem('presupuesto'));
+    console.log(pres);
   }
 
   simular() {
