@@ -31,7 +31,7 @@ export class PresupuestoPage implements OnInit {
 
   guardarEfectivo(){
     const {detalleEfectivo,procedenciaEfectivo,aporteEfectivo,detalleEntidad,
-      procedenciaEntidad,aporteEntidad,detalleOtros,procedenciaOtros,aporteOtros  } = this.form1.value;
+      procedenciaEntidad,aporteEntidad,detalleOtros,procedenciaOtros,aporteOtros  } = this.form1.value;        
       this.presupuestoService.efectivo.detalle = [];
       this.enviarDetallesEfectivo(detalleEfectivo,procedenciaEfectivo,aporteEfectivo);
       this.enviarDetallesEfectivo(detalleEntidad,procedenciaEntidad,aporteEntidad);
@@ -56,17 +56,22 @@ export class PresupuestoPage implements OnInit {
     const local = localStorage.getItem('presupuesto');
     if(local){
       const objectlocal = JSON.parse(local);
-      this.form1 = this.fb.group({
-        detalleEfectivo:[objectlocal.efectivo.detalle[0].detalle],
-        procedenciaEfectivo:[objectlocal.efectivo.detalle[0].procedencia],
-        aporteEfectivo:[objectlocal.efectivo.detalle[0].aporte],
-        detalleEntidad:[objectlocal.efectivo.detalle[1].detalle],
-        procedenciaEntidad:[objectlocal.efectivo.detalle[1].procedencia],
-        aporteEntidad:[objectlocal.efectivo.detalle[1].aporte],
-        detalleOtros:[objectlocal.efectivo.detalle[2].detalle],
-        procedenciaOtros:[objectlocal.efectivo.detalle[2].procedencia],
-        aporteOtros:[objectlocal.efectivo.detalle[2].aporte]
-      })
+      try {
+        this.form1 = this.fb.group({
+          detalleEfectivo:[objectlocal.efectivo.detalle[0].detalle],
+          procedenciaEfectivo:[objectlocal.efectivo.detalle[0].procedencia],
+          aporteEfectivo:[objectlocal.efectivo.detalle[0].aporte],
+          detalleEntidad:[objectlocal.efectivo.detalle[1].detalle],
+          procedenciaEntidad:[objectlocal.efectivo.detalle[1].procedencia],
+          aporteEntidad:[objectlocal.efectivo.detalle[1].aporte],
+          detalleOtros:[objectlocal.efectivo.detalle[2].detalle],
+          procedenciaOtros:[objectlocal.efectivo.detalle[2].procedencia],
+          aporteOtros:[objectlocal.efectivo.detalle[2].aporte]
+        })
+      } catch (error) {
+        
+      }
+      
     }
   }
   sumarTotal1():number{
