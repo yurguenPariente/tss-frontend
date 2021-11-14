@@ -66,6 +66,29 @@ export class CostoOperaPage implements OnInit {
      +Number(this.miFormulario.get('Salud').value)  
    }
  
-  
+   guardar(){
+    this.CostoOp = {
+        
+        Impuestos: this.miFormulario.get('Impuestos').value,
+    Alimentacion: this.miFormulario.get('Alimentacion').value,
+   ServiciodeLuz:this.miFormulario.get('ServiciodeLuz').value,
+    ServiciodeAgua:this.miFormulario.get('ServiciodeAgua').value,
+   ServiciodeGas: this.miFormulario.get('ServiciodeGas').value,
+    ServiciodeTelefono:this.miFormulario.get('ServiciodeTelefono').value,
+    ServiciodeInternet:this.miFormulario.get('ServiciodeInternet').value,
+    Alquiler: this.miFormulario.get('Alquiler').value,
+    Transporte: this.miFormulario.get('Transporte').value,
+    MaterialdeEscritorio: this.miFormulario.get('MaterialdeEscritorio').value,
+    PagoaEmpleados: this.miFormulario.get('PagoaEmpleados').value,
+    Promoción:this.miFormulario.get('Promoción').value,
+    Mantenimiento: this.miFormulario.get('Mantenimiento').value,
+    Vestimenta: this.miFormulario.get(' Vestimenta').value,
+    Salud: this.miFormulario.get('Salud').value,
+    
+        total: this.sumar()
+    }
+    localStorage.setItem('CostoOp',JSON.stringify(this.CostoOp));
+    
+  }
 
 }
