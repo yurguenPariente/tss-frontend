@@ -1,61 +1,102 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>CostoOpera</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Costos OPERATIVOS</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <form class="example-form mt-2" [formGroup]="miFormulario">
-  <ion-grid [fixed]="true">
+ 
+
+  <ion-grid [fixed]="true" >
+    
     <ion-row>
-      <ion-col>
+      <ion-col col-6>
         <p> COSTOS OPERATIVOS</p>
-        <p >Impuestos        </p>
-        <p>Alimentación        </p>
-<p>Servicio de Luz</p>
-<p>Servicio de Agua</p>
-<p>Servicio de Gas</p>
-<p>Servicio de Telefono/Celular</p>
-<p>Servicio de Internet</p>
-<p>Alquiler</p>
-<p>Transporte</p>
-<p>Material de Escritorio</p>
-<p>Pago a Empleados  </p>
+        <p>Impuestos </p>
+        <p>Alimentación </p>
+        <p>Servicio de Luz</p>
+        <p>Servicio de Agua</p>
+        <p>Servicio de Gas</p>
+        <p>Servicio de Telefono/Celular</p>
+        <p>Servicio de Internet</p>
+        <p>Alquiler</p>
+        <p>Transporte</p>
+        <p>Material de Escritorio</p>
+        <p>Pago a Empleados </p>
 
-<p>Promoción</p>
-<p>Mantenimiento</p>
-<p>Vestimenta</p>
-<p>Salud</p>
+        <p>Promoción</p>
+        <p>Mantenimiento</p>
+        <p>Vestimenta</p>
+        <p>Salud</p>
 
 
+        
+      </ion-col>
 
-</ion-col>
-    
-    
-      <ion-col>
-        <form [formGroup]="miFormulario">
-          <P> NEGOCIO</P>
-          <p>Numero 1 : <input type="number" ng-model="n1"></p>
-        <p>Numero 2 : <input type="number" ng-model="n2"></p>
-        <p>Numero 3 : <input type="number" ng-model="n3"></p>
-        <p>Numero 4 : <input type="number" ng-model="n4"></p>
-        <p>Numero 5 : <input type="number" ng-model="n5"></p>
-        <p>Numero 6 : <input type="number" ng-model="n6"></p>
-        <p>Numero 7 : <input type="number" ng-model="n7"></p>
-        <p>Numero 8 : <input type="number" ng-model="n8"></p>
-        <p>Numero 9 : <input type="number" ng-model="n9"></p>
-        <p>Numero 10 : <input type="number" ng-model="n10"></p>
-        <p>Numero 11 : <input type="number" ng-model="n11"></p>
-        <p>Numero 12 : <input type="number" ng-model="n12"></p>
-        <p>Numero 13 : <input type="number" ng-model="n13"></p>
-        <p>Numero 14 : <input type="number" ng-model="n14"></p>
-        <p>Numero 15 : <input type="number" ng-model="n15"></p>
+
+      <ion-col col-6>
+       
+          <p> NEGOCIO</p>
+          <form class="example-form mt-2" [formGroup]="miFormulario">
+            
+            <p>
+            <input type="number" min="0" value="0" matInput formControlName='Impuestos'>
+          </p>
+            <p>
+            <input type="number" min="0" value="0" matInput formControlName='Alimentacion'></p>
+            <p>
+            <input type="number" min="0" value="0" matInput formControlName='ServiciodeLuz'>
+            </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='ServiciodeAgua'>
+          </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='ServiciodeGas'>
+          </p>
+          <p>
+            <input padding="5px" type="number" min="0" value="0" matInput formControlName='ServiciodeTelefono'>
+          </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='ServiciodeInternet'>
+          </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='Alquiler'>
+          </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='Transporte'>
+          </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='MaterialdeEscritorio'>
+          </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='PagoaEmpleados'>
+          </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='Promoción'>
+          </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='Mantenimiento'>
+          </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='Vestimenta'>
+          </p>
+          <p>
+            <input type="number" min="0" value="0" matInput formControlName='Salud'>
+          </p>
+           
+            <h4>Total: {{sumar() | number}}</h4>
+            
         </form>
-    
 
       </ion-col>
     </ion-row>
     
+    
   </ion-grid>
-</form>
+ 
+  <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="guardar()"
+  [disabled]="miFormulario.invalid" routerLink='/vistas/costos/costos-directos'>Siguiente</button>
 </ion-content>
