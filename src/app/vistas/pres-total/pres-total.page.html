@@ -8,69 +8,70 @@
 </ion-header>
 
 <ion-content>
-    <div style="padding-left: 25px;">
+    <div style="padding: 25px;">
         <h2>El total de su presupuesto</h2>
-        <h2>Aporte propio: {{ apPropio }} Bs. <a style="font-size: small;" (click)="detallesAporte()">Ver detalles</a></h2>
+        <h2>Aporte propio: {{ apPropio | number}} Bs. <a style="font-size: small;" class="float-end" (click)="detallesAporte()">Ver detalles</a></h2>
         <div *ngIf="apFlag">
             <ion-list>
                 <ion-item>
-                    <ion-label>Efectivo: {{ pres.efectivo.total }}Bs.</ion-label>
+                    <ion-label>Efectivo: {{ pres.efectivo.total  | number}}Bs.</ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Mano de obra: {{ pres.capitalOperativo.manoObra.totalPropio }} Bs. </ion-label>
+                    <ion-label>Mano de obra: {{ pres.capitalOperativo.manoObra.detalles[0].aporte | number}} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Operativos: {{ pres.capitalOperativo.operativos.totalPropio }} Bs. </ion-label>
+                    <ion-label>Operativos: {{ pres.capitalOperativo.operativos.totalPropio | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Materia prima: {{ pres.capitalOperativo.prima.totalPropio }} Bs. </ion-label>
+                    <ion-label>Materia prima: {{ pres.capitalOperativo.prima.totalPropio | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Promocion: {{ pres.capitalOperativo.promocion.totalPropio }} Bs. </ion-label>
+                    <ion-label>Promocion: {{ pres.capitalOperativo.promocion.totalPropio | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Infraestructura: {{ pres.capitalInversion.infraestructura.totalPropio }} Bs. </ion-label>
+                    <ion-label>Infraestructura: {{ pres.capitalInversion.infraestructura.totalPropio | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Legales: {{ pres.capitalInversion.legales.totalPropio }} Bs. </ion-label>
+                    <ion-label>Legales: {{ pres.capitalInversion.legales.totalPropio | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Maquinaria: {{ pres.capitalInversion.maquinaria.totalPropio }} Bs. </ion-label>
+                    <ion-label>Maquinaria: {{ pres.capitalInversion.maquinaria.totalPropio | number }} Bs. </ion-label>
                 </ion-item>
             </ion-list>
         </div>
-        <h2>Plan de inversion: {{ apInv }} Bs. <a style="font-size: small;" (click)="detallesInv()">Ver detalles</a><br></h2>
+        <h2>Plan de inversion: {{ apInv | number }} Bs. <a style="font-size: small;" class="float-end" (click)="detallesInv()">Ver detalles</a><br></h2>
         <div *ngIf="piFlag">
             <ion-list>
                 <ion-item>
-                    <ion-label>Mano de obra: {{ pres.capitalOperativo.manoObra.totalInvertido }} Bs. </ion-label>
+                    <ion-label>Mano de obra: {{ pres.capitalOperativo.manoObra.totalInvertido | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Operativos: {{ pres.capitalOperativo.operativos.totalInvertido }} Bs. </ion-label>
+                    <ion-label>Operativos: {{ pres.capitalOperativo.operativos.totalInvertido | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Materia prima: {{ pres.capitalOperativo.prima.totalInvertido }} Bs. </ion-label>
+                    <ion-label>Materia prima: {{ pres.capitalOperativo.prima.totalInvertido | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Promocion: {{ pres.capitalOperativo.promocion.totalInvertido }} Bs. </ion-label>
+                    <ion-label>Promocion: {{ pres.capitalOperativo.promocion.totalInvertido | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Infraestructura: {{ pres.capitalInversion.infraestructura.totalInvertido }} Bs. </ion-label>
+                    <ion-label>Infraestructura: {{ pres.capitalInversion.infraestructura.totalInvertido | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Legales: {{ pres.capitalInversion.legales.totalInvertido }} Bs. </ion-label>
+                    <ion-label>Legales: {{ pres.capitalInversion.legales.totalInvertido | number }} Bs. </ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Maquinaria: {{ pres.capitalInversion.maquinaria.totalInvertido }} Bs. </ion-label>
+                    <ion-label>Maquinaria: {{ pres.capitalInversion.maquinaria.totalInvertido | number }} Bs. </ion-label>
                 </ion-item>
             </ion-list>
         </div><br>
-        <p>Total del proyecto: {{ apInv + apPropio - pres.efectivo.total }} Bs.</p>
-        <p>Aporte propio: {{ apPropio }} Bs.</p>
+        <hr>
+        <p>Total del proyecto: {{ apInv + apPropio - pres.efectivo.total | number }} Bs.</p>
+        <p>Aporte propio: {{ apPropio | number }} Bs.</p>
 
         <p>% de aporte propio: {{ procentajeApPropio() }}%</p>
 
-        <p>Monto a financiar: {{ apInv - pres.efectivo.total }} Bs.</p>
+        <p>Monto a financiar: {{ apInv - pres.efectivo.total | number}} Bs.</p>
 
     </div>
     <!--h2 style="padding-left: 25px;">Desembolsos</h2>

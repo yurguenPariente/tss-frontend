@@ -29,7 +29,7 @@ export class PresTotalPage implements OnInit {
   }
 
   calcularTotalPropio(){
-    this.apPropio = this.pres.efectivo.total + this.pres.capitalOperativo.manoObra.totalPropio + this.pres.capitalOperativo.operativos.totalPropio +
+    this.apPropio = this.pres.efectivo.total + this.pres.capitalOperativo.manoObra.detalles[0].aporte + this.pres.capitalOperativo.operativos.totalPropio +
       this.pres.capitalOperativo.prima.totalPropio + this.pres.capitalOperativo.promocion.totalPropio + this.pres.capitalInversion.infraestructura.totalPropio
       +this.pres.capitalInversion.legales.totalPropio + this.pres.capitalInversion.maquinaria.totalPropio;
   }

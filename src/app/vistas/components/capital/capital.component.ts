@@ -181,6 +181,7 @@ export class CapitalComponent implements OnInit {
           break;
       }
     }
+    this.guardar();
   }
 
 }
