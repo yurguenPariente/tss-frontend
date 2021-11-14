@@ -82,7 +82,7 @@ export class CostoOperaPage implements OnInit {
     PagoaEmpleados: this.miFormulario.get('PagoaEmpleados').value,
     Promoción:this.miFormulario.get('Promoción').value,
     Mantenimiento: this.miFormulario.get('Mantenimiento').value,
-    Vestimenta: this.miFormulario.get(' Vestimenta').value,
+    Vestimenta: this.miFormulario.get('Vestimenta').value,
     Salud: this.miFormulario.get('Salud').value,
     
         total: this.sumar()
