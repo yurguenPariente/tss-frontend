@@ -95,11 +95,11 @@
             <h3 class="text-center"><small>Capital Operativo</small></h3>
             <ng-template matStepLabel>Capital Operativo</ng-template>
             <div>
-                <h5>Mano de obra</h5>
+                <h4>Mano de obra</h4>
                 <app-capital [inversion]="false" tipo="mano"></app-capital>
             </div>
             <div>
-                <h5>Materia prima, insumos y/o animales de engorde</h5>
+                <h4>Materia prima, insumos y/o animales de engorde</h4>
                 <small>Detalle 1</small>
                 <app-capital [indice]='0' tipo="prima"></app-capital>
                 <small>Detalle 2</small>
@@ -108,18 +108,17 @@
                 <app-capital [indice]='2' tipo="prima"></app-capital>
             </div>
             <div>
-                <h5>Requerimientos promocionales</h5>
+                <h4>Requerimientos promocionales</h4>
                 <small>Requerimiento 1</small>
                 <app-capital [indice]='0' tipo="promocion"></app-capital>
                 <small>Requerimiento 2</small>
                 <app-capital [indice]='1' tipo="promocion"></app-capital>
             </div>
             <div>
-                <h5>Gastos operativos</h5>
+                <h4>Gastos operativos</h4>
                 <app-capital [indice]='0' [aporte]='false' tipo="operativos"></app-capital>
                 <app-capital [indice]='1' [aporte]="false" tipo="operativos"></app-capital>
             </div>
-            <div class="mb-3">Total: 0</div>
             <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
             <button mat-flat-button color="primary" class="float-end" matStepperNext>Siguiente</button>
         </mat-step>
@@ -128,7 +127,7 @@
             <h3 class="text-center"><small>Capital de Inversion</small></h3>
             <ng-template matStepLabel>Capital Operativo</ng-template>
             <div>
-                <h5>Infraestructura</h5>
+                <h4>Infraestructura</h4>
                 <small>Detalle 1</small>
                 <app-capital tipo="infra" [indice]="0"></app-capital>
                 <small>Detalle 2</small>
@@ -137,7 +136,7 @@
                 <app-capital tipo="infra" [indice]='2'></app-capital>
             </div>
             <div>
-                <h5>Maquinaria, Equipos, Vehiculos y/o Ganado</h5>
+                <h4>Maquinaria, Equipos, Vehiculos y/o Ganado</h4>
                 <small>Detalle 1</small>
                 <app-capital [indice]='0' tipo="maqui"></app-capital>
                 <small>Detalle 2</small>
@@ -150,7 +149,7 @@
                 <app-capital [indice]='4' tipo="maqui"></app-capital>
             </div>
             <div>
-                <h5>Requerimientos legales</h5>
+                <h4>Requerimientos legales</h4>
                 <small>Requerimiento 1</small>
                 <app-capital [indice]='0' tipo="legales"></app-capital>
                 <small>Requerimiento 2</small>
@@ -158,17 +157,17 @@
                 <small>Requerimiento 3</small>
                 <app-capital [indice]='2' tipo="legales"></app-capital>
             </div>
-
-            <div class="mb-3">Total: 0</div>
             <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
             <button mat-flat-button color="primary" class="float-end" matStepperNext>Siguiente</button>
         </mat-step>
 
         <mat-step>
             <ng-template matStepLabel>Terminar</ng-template>
-            <p>Todo finalizado correctamente!!</p>
-            <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
-            <button mat-flat-button color="primary" class="float-end" (click)="guardar()" routerLink='/vistas/pres-total'>Guardar y Continuar</button>
+            <h2>Todo finalizado correctamente!!</h2>
+            <div class="ultimo">
+                <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
+                <button mat-flat-button color="primary" class="float-end" (click)="guardar()" routerLink='/vistas/pres-total'>Guardar y Continuar</button>
+            </div>
         </mat-step>
     </mat-stepper>
 
