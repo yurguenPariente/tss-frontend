@@ -25,20 +25,32 @@ export class SimulacionPage implements OnInit {
    }
 
   ngOnInit() {
-    const servicios = JSON.parse(localStorage.getItem('ventasMes'));
-    const inver = Number(localStorage.getItem('inver'))
-    this.miFormulario = this.fb.group({
-      invInicial:[inver, Validators.required],
-      ganancias:[servicios.total,[Validators.required]],
-      salarios:[this.proyecto.salarios,[Validators.required]],      
-      gastosBasicos:[this.proyecto.gastosBasicos,[Validators.required]],      
-    })
+    this.cargarDatos();
     this.getDatosPresupuesto();
   }
 
+  cargarDatos(){
+    const servicios = JSON.parse(localStorage.getItem('ventasMes'));
+    const inver = Number(localStorage.getItem('inver'));
+    const costosop = JSON.parse(localStorage.getItem('CostoOp'));
+    this.miFormulario = this.fb.group({
+      invInicial:[inver, Validators.required],
+      ganancias:[servicios.total,[Validators.required]],
+      salarios:[costosop.PagoaEmpleados,[Validators.required]],      
+      gastosBasicos:[this.sumarGastos(),[Validators.required]],      
+    });
+  }
   getDatosPresupuesto(){
     let pres = JSON.parse(localStorage.getItem('presupuesto'));
     console.log(pres);
+  }
+  sumarGastos(): number{
+    const local = localStorage.getItem('CostoOp');
+    if(local){
+      const localob = JSON.parse(local);
+      return localob.ServiciodeLuz + localob.ServiciodeAgua + localob.ServiciodeGas + 
+      localob.ServiciodeTelefono + localob.ServiciodeInternet;
+    }
   }
 
   simular() {

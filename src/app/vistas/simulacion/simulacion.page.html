@@ -8,25 +8,31 @@
 </ion-header>
 
 <ion-content>
-    <h2 style="padding-left: 25px;">Por favor llene los campos</h2>
+    <h2 class="mt-3 text-center">Datos para la simulacion</h2>
     <div>
         <form class="example-form mt-2" [formGroup]="miFormulario">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Inversion inicial</mat-label>
-                <input matInput formControlName='invInicial'>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Ganancias del primer año</mat-label>
-                <input matInput formControlName='ganancias'>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Salarios</mat-label>
-                <input matInput formControlName='salarios'>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Gastos generales</mat-label>
-                <input matInput formControlName='gastosBasicos'>
-            </mat-form-field>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Inversion inicial</mat-label>
+                        <input matInput formControlName='invInicial'>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Ganancias del primer año</mat-label>
+                        <input matInput formControlName='ganancias'>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Salarios</mat-label>
+                        <input matInput formControlName='salarios'>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Gastos generales</mat-label>
+                        <input matInput formControlName='gastosBasicos'>
+                    </mat-form-field>
+                </div>
+            </div>
         </form>
     </div>
     <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="simular()" [disabled]="miFormulario.invalid">Simular</button><br>
