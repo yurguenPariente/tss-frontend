@@ -47,6 +47,36 @@ export class SimulacionService {
 
   }
 
+  simularAnhosParaRentable(invInicial, gananciasPrimerAnho, sueldos, gastosGen) {
+    var flujos = new Array();
+    var r = 0.0;
+
+    var anhosParaBeneficio = 0;
+    var ganancias = gananciasPrimerAnho;
+    var impuestos = ganancias/4;
+    var salarios = sueldos;
+    var gastosGenerales = gastosGen;
+    var flag = true;
+
+    while(flag) {
+      r = Math.random();
+
+      flujos.push(ganancias-impuestos-salarios-gastosGenerales);
+
+      ganancias = this.calculoIngresos(r,ganancias);
+      impuestos = ganancias/4;
+      salarios = this.calculoSalarios(r, salarios);
+      gastosGenerales = this.calculoGastosGenerales(r, gastosGenerales);     
+
+      if (this.van(invInicial, flujos, 0.03) >= 0 || anhosParaBeneficio > 100) {
+        flag = false;
+      } 
+      anhosParaBeneficio++;
+    }
+    return ("Se necesitan en promedio "+anhosParaBeneficio+" años para que el proyecto sea rentable")
+
+  }
+
   calculoIngresos(r, ganancias){
     let res = 0.0;
     if (r < 0.759999){
