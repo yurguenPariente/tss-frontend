@@ -14,23 +14,24 @@
     
     <ion-row>
       <ion-col col-6>
-        <p> COSTOS OPERATIVOS</p>
-        <p>Impuestos </p>
-        <p>Alimentación </p>
-        <p>Servicio de Luz</p>
-        <p>Servicio de Agua</p>
-        <p>Servicio de Gas</p>
-        <p>Servicio de Telefono/Celular</p>
-        <p>Servicio de Internet</p>
-        <p>Alquiler</p>
-        <p>Transporte</p>
-        <p>Material de Escritorio</p>
-        <p>Pago a Empleados </p>
-
-        <p>Promoción</p>
-        <p>Mantenimiento</p>
-        <p>Vestimenta</p>
-        <p>Salud</p>
+        <h4> COSTOS OPERATIVOS</h4>
+        <div>
+          <p>Impuestos </p>
+          <p>Alimentación </p>
+          <p>Servicio de Luz</p>
+          <p>Servicio de Agua</p>
+          <p>Servicio de Gas</p>
+          <p><small>Servicio de Telefono/Celular</small></p>
+          <p>Servicio de Internet</p>
+          <p>Alquiler</p>
+          <p>Transporte</p>
+          <p>Material de Escritorio</p>
+          <p>Pago a Empleados </p>
+          <p>Promoción</p>
+          <p>Mantenimiento</p>
+          <p>Vestimenta</p>
+          <p>Salud</p>
+        </div>
 
 
         
@@ -39,52 +40,51 @@
 
       <ion-col col-6>
        
-          <p> NEGOCIO</p>
+          <h4> NEGOCIO</h4>
           <form class="example-form mt-2" [formGroup]="miFormulario">
-            
             <p>
-            <input type="number" min="0" value="0" matInput formControlName='Impuestos'>
-          </p>
+              <input type="number" min="0" value="0"  formControlName='Impuestos'>
+            </p>
             <p>
-            <input type="number" min="0" value="0" matInput formControlName='Alimentacion'></p>
+            <input type="number" min="0" value="0"  formControlName='Alimentacion'></p>
             <p>
-            <input type="number" min="0" value="0" matInput formControlName='ServiciodeLuz'>
+            <input type="number" min="0" value="0"  formControlName='ServiciodeLuz'>
             </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='ServiciodeAgua'>
+            <input type="number" min="0" value="0"  formControlName='ServiciodeAgua'>
           </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='ServiciodeGas'>
+            <input type="number" min="0" value="0"  formControlName='ServiciodeGas'>
           </p>
           <p>
-            <input padding="5px" type="number" min="0" value="0" matInput formControlName='ServiciodeTelefono'>
+            <input padding="5px" type="number" min="0" value="0"  formControlName='ServiciodeTelefono'>
           </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='ServiciodeInternet'>
+            <input type="number" min="0" value="0"  formControlName='ServiciodeInternet'>
           </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='Alquiler'>
+            <input type="number" min="0" value="0"  formControlName='Alquiler'>
           </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='Transporte'>
+            <input type="number" min="0" value="0"  formControlName='Transporte'>
           </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='MaterialdeEscritorio'>
+            <input type="number" min="0" value="0"  formControlName='MaterialdeEscritorio'>
           </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='PagoaEmpleados'>
+            <input type="number" min="0" value="0"  formControlName='PagoaEmpleados'>
           </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='Promoción'>
+            <input type="number" min="0" value="0"  formControlName='Promoción'>
           </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='Mantenimiento'>
+            <input type="number" min="0" value="0"  formControlName='Mantenimiento'>
           </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='Vestimenta'>
+            <input type="number" min="0" value="0"  formControlName='Vestimenta'>
           </p>
           <p>
-            <input type="number" min="0" value="0" matInput formControlName='Salud'>
+            <input type="number" min="0" value="0"  formControlName='Salud'>
           </p>
            
             <h4>Total: {{sumar() | number}}</h4>
@@ -98,5 +98,5 @@
   </ion-grid>
  
   <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="guardar()"
-  [disabled]="miFormulario.invalid" routerLink='/vistas/costo-opera'>Siguiente</button>
+  [disabled]="miFormulario.invalid" routerLink='/vistas/simulacion'>Siguiente</button>
 </ion-content>
