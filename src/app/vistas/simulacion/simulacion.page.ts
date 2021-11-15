@@ -64,6 +64,8 @@ export class SimulacionPage implements OnInit {
     console.log(this.proyecto);
     this.resultados = this.simularService.simular(this.miFormulario.get('invInicial').value, this.miFormulario.get('ganancias').value, 
       this.miFormulario.get('salarios').value, this.miFormulario.get('gastosBasicos').value);
+    /*this.resultados = this.simularService.simularAnhosParaRentable(this.miFormulario.get('invInicial').value, this.miFormulario.get('ganancias').value, 
+      this.miFormulario.get('salarios').value, this.miFormulario.get('gastosBasicos').value);*/
   }
 
 }
