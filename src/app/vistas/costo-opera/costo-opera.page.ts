@@ -28,22 +28,22 @@ export class CostoOperaPage implements OnInit {
     total: 0
   }
   miFormulario: FormGroup= this.fb.group({
-    Impuestos: [ 0, [Validators.required, Validators.max(1000000)]],
-    Alimentacion: [0, [Validators.required, Validators.max(1000000)]],
-   ServiciodeLuz: [ 0, [Validators.required, Validators.max(1000000)]],
-    ServiciodeAgua:[ 0, [Validators.required, Validators.max(1000000)]],
-   ServiciodeGas: [ 0, [Validators.required, Validators.max(1000000)]],
-    ServiciodeTelefono:[ 0, [Validators.required, Validators.max(1000000)]],
-    ServiciodeInternet:[ 0, [Validators.required, Validators.max(1000000)]],
-    Alquiler: [0, [Validators.required, Validators.max(1000000)]],
-    Transporte: [ 0, [Validators.required, Validators.max(1000000)]],
-    MaterialdeEscritorio: [ 0, [Validators.required, Validators.max(1000000)]],
-    PagoaEmpleados: [ 0, [Validators.required, Validators.max(1000000)]],
-    Promoción:[ 0, [Validators.required, Validators.max(1000000)]],
-    Mantenimiento: [ 0, [Validators.required, Validators.max(1000000)]],
-    Vestimenta: [ 0, [Validators.required, Validators.max(1000000)]],
-    Salud: [ 0, [Validators.required, Validators.max(1000000)]],
-    total: [ 0, [Validators.required, Validators.max(1000000)]]
+    Impuestos: [ 0, [ Validators.max(1000000)]],
+    Alimentacion: [0, [ Validators.max(1000000)]],
+   ServiciodeLuz: [ 0, [ Validators.max(1000000)]],
+    ServiciodeAgua:[ 0, [ Validators.max(1000000)]],
+   ServiciodeGas: [ 0, [ Validators.max(1000000)]],
+    ServiciodeTelefono:[ 0, [ Validators.max(1000000)]],
+    ServiciodeInternet:[ 0, [ Validators.max(1000000)]],
+    Alquiler: [0, [ Validators.max(1000000)]],
+    Transporte: [ 0, [ Validators.max(1000000)]],
+    MaterialdeEscritorio: [ 0, [ Validators.max(1000000)]],
+    PagoaEmpleados: [ 0,  [Validators.max(1000000)]],
+    Promoción:[ 0, [ Validators.max(1000000)]],
+    Mantenimiento: [ 0, [ Validators.max(1000000)]],
+    Vestimenta: [ 0, [ Validators.max(1000000)]],
+    Salud: [ 0, [ Validators.max(1000000)]],
+    total: [ 0, [ Validators.max(1000000)]]
   })
   constructor(private fb: FormBuilder) { }
   // constructor() { }
