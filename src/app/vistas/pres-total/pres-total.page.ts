@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CapitalOperativo, CapitalO, Efectivo, CapitalInversion, Presupuesto } from '../../interfaces/capital';
+import { SimulacionService } from '../services/simulacion.service';
 
 @Component({
   selector: 'app-pres-total',
@@ -14,7 +15,7 @@ export class PresTotalPage implements OnInit {
   apPropio: number = 0;
   apInv: number = 0;
 
-  constructor() { }
+  constructor(private simulacionService: SimulacionService) { }
 
   ngOnInit() {
     this.getDatosPresupuesto();
@@ -50,6 +51,10 @@ export class PresTotalPage implements OnInit {
   detallesInv(){
     this.piFlag = !this.piFlag;
     console.log(this.piFlag);
+  }
+  sumar(){
+    const inver = this.apInv + this.apPropio - this.pres.efectivo.total;
+    localStorage.setItem('inver',inver.toString())
   }
 
 }
