@@ -20,6 +20,7 @@ export class CostosService {
     localStorage.setItem('costosDirectos', JSON.stringify(this.costosDirectos));
   }
   sumarMub(): number{
+    console.log(this.arregloProductos)  
     let totalC: number = 0;
     let totalV: number = 0;
     for(let item of this.arregloProductos){
@@ -29,6 +30,10 @@ export class CostosService {
     return (totalV-totalC)/totalV;
   }
   guardarProductos(producto: Producto, indice:number){
-    this.arregloProductos.splice(indice,1,producto);
+    if(this.arregloProductos.length > 0){
+      this.arregloProductos.splice(indice,1,producto);
+    }else{
+      this.arregloProductos.push(producto);
+    }
   }
 }

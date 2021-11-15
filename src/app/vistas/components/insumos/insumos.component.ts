@@ -123,6 +123,7 @@ export class InsumosComponent implements OnInit {
 
   guardarDatos(){
     let arreglo2: Insumo[]=[];
+    this.totales = [];
     for(let insumo of this.insumos.value){
       this.insu = {
         nombre: insumo.insumo,
@@ -132,8 +133,8 @@ export class InsumosComponent implements OnInit {
         total: (insumo.cantidad/insumo.unidadesProd)*insumo.precioU
       }
       arreglo2.push(this.insu);
-      this.totales.splice(this.indice,1,this.insu.total);
-      console.log(this.totales);
+        this.totales.push(this.insu.total);
+      
     }
     this.insumosArreglo = arreglo2;
     this.guardarProducto();
@@ -159,7 +160,9 @@ export class InsumosComponent implements OnInit {
 
   precioDeCompra(): number{
     let res = 0;
+
     for(let total of this.totales){
+      console.log(this.totales)
       res += total;
     }
     return res;

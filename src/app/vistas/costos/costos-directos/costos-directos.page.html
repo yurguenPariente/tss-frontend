@@ -33,7 +33,7 @@
         <div class="col-4">
           <small>Costos de produccion anuales</small>
           <div class="alert alert-danger">
-            {{totalCosto}}
+            {{costosAnual() | number}}
           </div>
         </div>
         <div class="col-4">
@@ -45,7 +45,7 @@
       </div>
       <div>
         <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
-        <button mat-flat-button color="primary" (click)="guardarLocal()" class="float-end" routerLink='/vistas/costo-opera'>Siguiente</button>
+        <button mat-flat-button color="primary" (click)="guardarLocal()" class="float-end" routerLink='/vistas/costo-opera'>Guardar y Continuar</button>
       </div>
     </mat-step>
   </mat-stepper>
