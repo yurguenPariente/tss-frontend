@@ -20,12 +20,16 @@ export class SimulacionPage implements OnInit {
     gastosBasicos:0
   }
   
-  constructor(private fb: FormBuilder, private simularService: SimulacionService, private presupuestoService: PresupuestoService) { }
+  constructor(private fb: FormBuilder, private simularService: SimulacionService, private presupuestoService: PresupuestoService) {
+    
+   }
 
   ngOnInit() {
+    const servicios = JSON.parse(localStorage.getItem('ventasMes'));
+    const inver = Number(localStorage.getItem('inver'))
     this.miFormulario = this.fb.group({
-      invInicial:[this.proyecto.invInicial, Validators.required],
-      ganancias:[this.proyecto.ganancias,[Validators.required]],
+      invInicial:[inver, Validators.required],
+      ganancias:[servicios.total,[Validators.required]],
       salarios:[this.proyecto.salarios,[Validators.required]],      
       gastosBasicos:[this.proyecto.gastosBasicos,[Validators.required]],      
     })

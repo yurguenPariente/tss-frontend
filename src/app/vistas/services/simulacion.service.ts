@@ -19,9 +19,8 @@ export class SimulacionService {
       var salarios = sueldos;
       var gastosGenerales = gastosGen;
 
-      for (let j = 0; j < 8; j++) {
+      for (let j = 0; j < 2; j++) {
         r = Math.random();
-        //console.log("Random "+r);
 
         flujos.push(ganancias-impuestos-salarios-gastosGenerales);
 
