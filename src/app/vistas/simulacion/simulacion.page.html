@@ -35,6 +35,23 @@
             </div>
         </form>
     </div>
-    <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="simular()" [disabled]="miFormulario.invalid">Simular</button><br>
-    <h2 style="padding-left: 25px;">{{ resultados }}</h2>
+    <div class="wrapper float-center" style="padding-left: 25px;">
+        <button mat-flat-button color='primary' class="me-3 mb-3 " (click)="toggle() " [disabled]="miFormulario.invalid ">Sin simulacion</button>
+        <button mat-flat-button color='primary' class="me-3 mb-3 " (click)="simular() " [disabled]="miFormulario.invalid ">Simular</button>
+    </div><br>
+
+    <div style="padding-left: 25px; padding-top: 75px;">
+        <div *ngIf="apFlag">
+            Sin simulacion, ingrese cuantos años quiere realizar el proyecto
+            <form class="example-form mt-2" [formGroup]="miFormulario2">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Años que se realizara el proyecto</mat-label>
+                    <input type="number" matInput formControlName='anhosDelProyecto'>
+                </mat-form-field>
+            </form>
+            <button mat-flat-button color='primary' class="me-3 mb-3 " (click)="sinSimulacion() " [disabled]="miFormulario2.invalid ">Aceptar</button>
+        </div>
+        <br>
+        <h2>{{ resultados }}</h2>
+    </div>
 </ion-content>
