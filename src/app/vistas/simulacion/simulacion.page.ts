@@ -11,15 +11,18 @@ import { SimulacionService } from '../services/simulacion.service';
 export class SimulacionPage implements OnInit {
 
   miFormulario: FormGroup;
+  miFormulario2: FormGroup;
   resultados: string = "";
-
+  apFlag: boolean = false;
   proyecto: any = {
     invInicial: 0,
     ganancias:0,
     salarios:0,
     gastosBasicos:0
   }
-  
+  anhos: any = {
+    anhosDelProyecto:0
+  }
   constructor(private fb: FormBuilder, private simularService: SimulacionService, private presupuestoService: PresupuestoService) {
     
    }
@@ -39,6 +42,10 @@ export class SimulacionPage implements OnInit {
       salarios:[costosop.PagoaEmpleados,[Validators.required]],      
       gastosBasicos:[this.sumarGastos(),[Validators.required]],      
     });
+
+    this.miFormulario2 = this.fb.group({
+      anhosDelProyecto:[this.anhos.anhosDelProyecto,[Validators.required]], 
+    })
   }
   getDatosPresupuesto(){
     let pres = JSON.parse(localStorage.getItem('presupuesto'));
@@ -54,7 +61,7 @@ export class SimulacionPage implements OnInit {
   }
 
   simular() {
-      
+    this.apFlag = false;
     this.proyecto = {
       invInicial :this.miFormulario.get('invInicial').value,
       ganancias : this.miFormulario.get('ganancias').value,
@@ -68,4 +75,26 @@ export class SimulacionPage implements OnInit {
       this.miFormulario.get('salarios').value, this.miFormulario.get('gastosBasicos').value);*/
   }
 
+  toggle(){
+    this.resultados = "";
+    this.apFlag = !this.apFlag;
+  }
+  sinSimulacion(){
+    this.resultados = "";
+    var flujos = new Array();
+    for (let i = 0; i < this.miFormulario2.get('anhosDelProyecto').value; i++) {      
+      flujos.push(this.miFormulario.get('ganancias').value-(this.miFormulario.get('ganancias').value/4)-this.miFormulario.get('salarios').value
+      -this.miFormulario.get('gastosBasicos').value);
+    }  
+
+    let van = this.simularService.van(this.miFormulario.get('invInicial').value, flujos, 0.03)
+
+    if( van >= 0){
+      this.resultados="Sin simular, si se realiza el proyecto durante "+ this.miFormulario2.get('anhosDelProyecto').value 
+      + " años el proyecto sera rentable con un VAN de " + van;
+    } else {
+      this.resultados="Sin simular, si se realiza el proyecto durante "+ this.miFormulario2.get('anhosDelProyecto').value 
+      +" años el proyecto no sera rentable con un VAN de "+ van;
+    }    
+  }
 }
