@@ -12,7 +12,7 @@ export class SimulacionPage implements OnInit {
 
   miFormulario: FormGroup;
   miFormulario2: FormGroup;
-  resultados: string = "";
+  resultados: any = "";
   apFlag: boolean = false;
   proyecto: any = {
     invInicial: 0,
@@ -89,12 +89,13 @@ export class SimulacionPage implements OnInit {
 
     let van = this.simularService.van(this.miFormulario.get('invInicial').value, flujos, 0.03)
 
-    if( van >= 0){
+    /*if( van >= 0){
       this.resultados="Sin simular, si se realiza el proyecto durante "+ this.miFormulario2.get('anhosDelProyecto').value 
       + " años el proyecto sera rentable con un VAN de " + van;
     } else {
       this.resultados="Sin simular, si se realiza el proyecto durante "+ this.miFormulario2.get('anhosDelProyecto').value 
       +" años el proyecto no sera rentable con un VAN de "+ van;
-    }    
+    }  */
+    this.resultados = van;  
   }
 }

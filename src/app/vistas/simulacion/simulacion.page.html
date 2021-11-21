@@ -52,6 +52,11 @@
             <button mat-flat-button color='primary' class="me-3 mb-3 " (click)="sinSimulacion() " [disabled]="miFormulario2.invalid ">Aceptar</button>
         </div>
         <br>
-        <h2>{{ resultados }}</h2>
+        <!--h2>{{ resultados }}</h2-->
+        <ion-list style="margin-right: 25px;">
+            <ion-item>
+                <ion-label>VAN:</ion-label> {{ resultados }}
+            </ion-item>
+        </ion-list>
     </div>
 </ion-content>

@@ -12,7 +12,7 @@ export class SimulacionService {
     var perdidas = 0;
     var flujos = new Array();
     var r = 0.0;
-
+    var van = 0.0;
     for (let i = 0; i < 1000; i++) {
       var ganancias = gananciasPrimerAnho;
       var impuestos = ganancias/4;
@@ -29,7 +29,7 @@ export class SimulacionService {
         salarios = this.calculoSalarios(r, salarios);
         gastosGenerales = this.calculoGastosGenerales(r, gastosGenerales);        
       }
-
+      van += this.van(invInicial, flujos, 0.03)/1000;
       if (this.van(invInicial, flujos, 0.03) >= 0) {
         rentables++;
       } else {
@@ -38,13 +38,13 @@ export class SimulacionService {
       
       flujos = [];
     }
-    console.log("Despues de ejecutar la simulacion 1000 veces se obtuvo los siguientes resultados");
+    /*console.log("Despues de ejecutar la simulacion 1000 veces se obtuvo los siguientes resultados");
     console.log("Veces que el proyecto fue rentable: "+rentables+ "("+Math.ceil(rentables / 10)+"%).");
-    console.log("Veces que el proyecto no fue rentable: "+perdidas+ "("+ Math.ceil(perdidas / 10)+"%).");
+    console.log("Veces que el proyecto no fue rentable: "+perdidas+ "("+ Math.ceil(perdidas / 10)+"%).");*/
 
-    return ("Veces que el proyecto fue rentable: "+rentables+ "("+Math.ceil(rentables / 10)+"%).")+  
-    "Veces que el proyecto no fue rentable: "+perdidas+ "("+ Math.ceil(perdidas / 10)+"%).";
-
+    /*return ("Veces que el proyecto fue rentable: "+rentables+ "("+Math.ceil(rentables / 10)+"%).")+  
+    "Veces que el proyecto no fue rentable: "+perdidas+ "("+ Math.ceil(perdidas / 10)+"%).";*/
+    return van;    
   }
 
   simularAnhosParaRentable(invInicial, gananciasPrimerAnho, sueldos, gastosGen) {
