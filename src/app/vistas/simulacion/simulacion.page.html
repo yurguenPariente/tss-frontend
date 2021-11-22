@@ -52,11 +52,21 @@
             <button mat-flat-button color='primary' class="me-3 mb-3 " (click)="sinSimulacion() " [disabled]="miFormulario2.invalid ">Aceptar</button>
         </div>
         <br>
-        <!--h2>{{ resultados }}</h2-->
+        <h2> {{ titulo }} </h2>
         <ion-list style="margin-right: 25px;">
             <ion-item>
-                <ion-label>VAN:</ion-label> {{ resultados }}
+                <ion-label>VAN: {{ resultados }}</ion-label>
             </ion-item>
+            <div *ngIf="!apFlag">
+                <ion-item>
+                    <ion-label>Exitosos: {{ resultadosSim[1] }} ({{ resultadosSim[2] }}%)</ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Fallidos: {{ resultadosSim[3] }} ({{ resultadosSim[4] }}%)</ion-label>
+                </ion-item>
+
+            </div>
         </ion-list>
     </div>
 </ion-content>

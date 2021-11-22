@@ -44,7 +44,7 @@ export class SimulacionService {
 
     /*return ("Veces que el proyecto fue rentable: "+rentables+ "("+Math.ceil(rentables / 10)+"%).")+  
     "Veces que el proyecto no fue rentable: "+perdidas+ "("+ Math.ceil(perdidas / 10)+"%).";*/
-    return van;    
+    return [van,rentables, Math.ceil(rentables / 10), perdidas, Math.ceil(perdidas / 10)];    
   }
 
   simularAnhosParaRentable(invInicial, gananciasPrimerAnho, sueldos, gastosGen) {

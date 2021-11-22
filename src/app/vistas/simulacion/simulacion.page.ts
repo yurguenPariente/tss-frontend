@@ -12,8 +12,11 @@ export class SimulacionPage implements OnInit {
 
   miFormulario: FormGroup;
   miFormulario2: FormGroup;
-  resultados: any = "";
+  resultados: any = "0";
+  resultadosSim: any = [0,0,0,0];
   apFlag: boolean = false;
+  titulo: string = "Resultados de la simulacion"
+
   proyecto: any = {
     invInicial: 0,
     ganancias:0,
@@ -62,21 +65,24 @@ export class SimulacionPage implements OnInit {
 
   simular() {
     this.apFlag = false;
+    this.titulo = "Resultados de la simulacion";
     this.proyecto = {
       invInicial :this.miFormulario.get('invInicial').value,
       ganancias : this.miFormulario.get('ganancias').value,
       salarios:this.miFormulario.get('salarios').value,
       gastosBasicos: this.miFormulario.get('gastosBasicos').value,    
     } 
-    console.log(this.proyecto);
-    this.resultados = this.simularService.simular(this.miFormulario.get('invInicial').value, this.miFormulario.get('ganancias').value, 
+    //console.log(this.proyecto);
+    this.resultadosSim = this.simularService.simular(this.miFormulario.get('invInicial').value, this.miFormulario.get('ganancias').value, 
       this.miFormulario.get('salarios').value, this.miFormulario.get('gastosBasicos').value);
+    this.resultados =this.resultadosSim[0];
     /*this.resultados = this.simularService.simularAnhosParaRentable(this.miFormulario.get('invInicial').value, this.miFormulario.get('ganancias').value, 
       this.miFormulario.get('salarios').value, this.miFormulario.get('gastosBasicos').value);*/
   }
 
   toggle(){
     this.resultados = "";
+    this.titulo = "Resultados sin simular";
     this.apFlag = !this.apFlag;
   }
   sinSimulacion(){
