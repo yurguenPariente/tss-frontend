@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-
+import { Label } from 'ng2-charts';
 @Injectable({
   providedIn: 'root'
 })
 export class SimulacionService {
-
+  array: number[] = [];
+  ite: Label[] = [];
   constructor() { }
 
   simular(invInicial, gananciasPrimerAnho, sueldos, gastosGen) {
@@ -123,4 +124,28 @@ export class SimulacionService {
   
     return van;
   }
+
+  van2(inicial,interes,flujoA){
+    let van = -inicial;
+    for(let i=0; i<36 ; i++){
+      van += (flujoA/12) / Math.pow(1+(interes/12),i+1);
+    }
+    return van-150970;
+  }
+
+  simularNuevo(a: number, b:number, c:number):number{
+    const comparativa = (c-a)/(b-a);
+    let res = 0;
+    for(let i=0; i< 12; i++){
+      let r = Math.random();
+      if(r <= comparativa){
+        res += a + (c-a)*Math.sqrt(r);
+      }else{
+        res += b-((b-c)*Math.sqrt(1-r));
+      }
+    }
+    return res;
+  }
+
+  
 }

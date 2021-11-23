@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { SimulacionService } from '../services/simulacion.service';
 export interface Opcion {
   nombre:string;
   valor:number
@@ -10,10 +11,13 @@ export interface Opcion {
   templateUrl: './flujo-acumulado.page.html',
   styleUrls: ['./flujo-acumulado.page.scss'],
 })
-export class FlujoAcumuladoPage implements OnInit {
+export class FlujoAcumuladoPage implements OnInit, AfterContentInit {
     total: number = JSON.parse(localStorage.getItem('ventasMes')).total;
     costosA: number = Number(localStorage.getItem('costosAnual'));
     totalGas: number = JSON.parse(localStorage.getItem('CostoOp')).total;
+    resultadoVan:number = 0;
+    exito:number = 0;
+    fracaso: number = 0;
     ELEMENT_DATA: Opcion[] = [
       {nombre:'Inversion Inicial',valor:200},
       {nombre:'Saldo Inicial',valor:500},
@@ -26,11 +30,35 @@ export class FlujoAcumuladoPage implements OnInit {
       {nombre:'Flujo Acumulado',valor:(this.total-this.costosA)-((this.totalGas)*12)-60361}
     
   ];
-  constructor() { }
+  constructor(private simulacionService:SimulacionService) { }
+
+  ngAfterContentInit(): void {
+    this.simularVan();
+  }
 
   ngOnInit() {
   }
   
+  
+  calcularVan(): number{
+    return this.simulacionService.van2(0,0.1150,(this.total-this.costosA)-((this.totalGas-1000)*12)-60361);
+  }
+
+  simularVan(){
+    const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
+    // console.log(ingresos, costos)
+    for(let i=0; i<100;i++){
+      let ingresos = this.simulacionService.simularNuevo(Number(baja),Number(alta),Number(media));
+      let costos = this.simulacionService.simularNuevo(536,1072,804);
+      let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((this.totalGas-1000)*12)-60361);
+      if(simu > 0){
+        this.exito ++;
+      }else{ 
+        this.fracaso ++;
+      }
+    }
+  }
+
   displayedColumns: string[] = [' ', 'Total Anual'];
   dataSource = this.ELEMENT_DATA;
 

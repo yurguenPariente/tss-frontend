@@ -1,15 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
 import { PresupuestoService } from '../services/presupuesto.service';
 import { SimulacionService } from '../services/simulacion.service';
-
 @Component({
   selector: 'app-simulacion',
   templateUrl: './simulacion.page.html',
   styleUrls: ['./simulacion.page.scss'],
 })
-export class SimulacionPage implements OnInit {
+export class SimulacionPage implements OnInit, AfterContentInit {
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  exito:number = 0;
+  fracaso: number = 0;
+  array: number[] = [];
+  iteraciones: Label[] = [];
+    public barChartData: ChartDataSets[] = [
+    
+  ];
 
+  public barChartLabels: Label[] = [];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
   miFormulario: FormGroup;
   miFormulario2: FormGroup;
   resultados: string = "";
@@ -23,13 +45,22 @@ export class SimulacionPage implements OnInit {
   anhos: any = {
     anhosDelProyecto:0
   }
-  constructor(private fb: FormBuilder, private simularService: SimulacionService, private presupuestoService: PresupuestoService) {
+  constructor(private fb: FormBuilder, private simularService: SimulacionService, private presupuestoService: PresupuestoService,
+    private simulacionService:SimulacionService) {
     
    }
 
   ngOnInit() {
     this.cargarDatos();
     this.getDatosPresupuesto();
+  }
+
+  ngAfterContentInit(): void {
+    this.simularVan();
+    this.barChartData = [
+      { data: this.array, label: 'Series A' },
+    ];
+    this.barChartLabels = this.iteraciones;
   }
 
   cargarDatos(){
@@ -97,4 +128,44 @@ export class SimulacionPage implements OnInit {
       +" años el proyecto no sera rentable con un VAN de "+ van;
     }    
   }
+  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public randomize(): void {
+    // Only Change 3 values
+    this.barChartData[0].data = [
+      Math.round(Math.random() * 100),
+      59,
+      80,
+      (Math.random() * 100),
+      56,
+      (Math.random() * 100),
+      40 ];
+  }
+  simularVan(){
+    const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
+    const totalGas = JSON.parse(localStorage.getItem('CostoOp')).total;
+
+    // console.log(ingresos, costos)
+    for(let j=0; j<10;j++){
+      for(let i=0; i<100;i++){
+        let ingresos = this.simulacionService.simularNuevo(Number(baja),Number(alta),Number(media));
+        let costos = this.simulacionService.simularNuevo(536,1072,804);
+        let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas-1000)*12)-60361);
+        this.array.push(simu);
+       this.iteraciones.push(`${i+1}`);
+        if(simu > 0){
+          this.exito ++;
+        }else{ 
+          this.fracaso ++;
+        }
+      }
+    }
+  }
+
 }
