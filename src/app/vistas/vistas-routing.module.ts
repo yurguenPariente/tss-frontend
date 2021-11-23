@@ -30,6 +30,10 @@ const routes: Routes = [
     loadChildren: () => import('./flujo/flujo.module').then( m => m.FlujoPageModule)
   },
   {
+    path:'modal',
+    loadChildren: () => import('./modal/modal.module').then(m => m.ModalPageModule)
+  },
+  {
     path: 'costo-opera',
     loadChildren: () => import('./costo-opera/costo-opera.module').then( m => m.CostoOperaPageModule)
   },  
@@ -38,9 +42,14 @@ const routes: Routes = [
     loadChildren: () => import('./simulacion/simulacion.module').then( m => m.SimulacionPageModule)
   },
   {
+    path: 'flujo-acumulado',
+    loadChildren: () => import('./flujo-acumulado/flujo-acumulado.module').then( m => m.FlujoAcumuladoPageModule)
+  },
+  {
     path:'**',
     redirectTo:'detalles'
   }
+
 
 ];
 

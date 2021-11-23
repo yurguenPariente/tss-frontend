@@ -5,9 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { SimulacionPageRoutingModule } from './simulacion-routing.module';
-
 import { SimulacionPage } from './simulacion.page';
 import { MaterialModule } from 'src/app/material/material.module';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
@@ -16,7 +16,9 @@ import { MaterialModule } from 'src/app/material/material.module';
     IonicModule,
     SimulacionPageRoutingModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    ChartsModule
+
   ],
   declarations: [SimulacionPage]
 })

@@ -17,7 +17,7 @@ import { BrowserModule } from '@angular/platform-browser';
     FormsModule,
     IonicModule,
     VistasPageRoutingModule,
-    MaterialModule
+    MaterialModule,
   ],
   declarations: [VistasPage],
  

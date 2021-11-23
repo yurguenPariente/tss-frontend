@@ -15,7 +15,7 @@ interface Option {
 })
 export class CostosPage implements OnInit {
   ventasMes: VentasMes = {
-    alta:100,
+    alta:0,
     media:0,
     baja:0,
     enero:0,

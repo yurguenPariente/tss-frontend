@@ -78,16 +78,17 @@ export class CostosDirectosPage implements OnInit{
 
   guardarLocal(){
     this.costosService.Guardar();
+    localStorage.setItem('costosAnual',this.costosAnual().toString())
   }
 
   costosAnual(){
     const local  = localStorage.getItem('ventasMes');
     if(local){
       const {enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre} = JSON.parse(local);
-      console.log(this.mub)
       return (enero*(1-this.mub/100)) + (febrero*(1-this.mub/100)) +(marzo*(1-this.mub/100)) +(abril*(1-this.mub/100)) +(mayo*(1-this.mub/100)) +(junio*(1-this.mub/100))+
       (julio*(1-this.mub/100)) + (agosto*(1-this.mub/100)) +(septiembre*(1-this.mub/100)) +(octubre*(1-this.mub/100))+(noviembre*(1-this.mub/100)) +(diciembre*(1-this.mub/100))
     }
+    
   }
 
 }
