@@ -20,12 +20,32 @@ export class DetallersProyectoPage implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.obtenerDatos();
     this.miFormulario= this.fb.group({
       nombre:[this.proyecto.nombre, Validators.required],
       representante:[this.proyecto.representante,[Validators.required]],
       direccion:[this.proyecto.direccion,[Validators.required]],      
       nit:[this.proyecto.nit,[Validators.required]],      
     })
+  }
+
+  obtenerDatos(){
+    var datos:Proyecto = JSON.parse(localStorage.getItem("detallesProyecto")); 
+    console.log("datos "+datos);
+    if(datos){
+      try {
+        /*this.proyecto.nombre = datos.nombre;
+        this.proyecto.direccion = datos.direccion;
+        this.proyecto.nit = datos.nit;
+        this.proyecto.representante = datos.representante;*/
+        this.proyecto = datos;
+       
+        
+      } catch (error) {
+        
+      }
+    }
+    
   }
 
   guardarDatos() {
