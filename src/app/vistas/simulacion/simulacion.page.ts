@@ -154,23 +154,44 @@ export class SimulacionPage implements OnInit, AfterContentInit {
       (Math.random() * 100),
       40 ];
   }
+  calcularVan(): number{
+    const total  = JSON.parse(localStorage.getItem('ventasMes')).total;
+    const costosA  = Number(localStorage.getItem('costosAnual'));
+    const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
+    return this.simulacionService.van2(0,0.1150,(total-costosA)-((totalGas-1000)*12)-60361);
+  }
+  // simularVan(){
+  //   const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
+  //   const totalGas = JSON.parse(localStorage.getItem('CostoOp')).total;
+
+  //   // console.log(ingresos, costos)
+  //   for(let j=0; j<10;j++){
+  //     for(let i=0; i<100;i++){
+  //       let ingresos = this.simulacionService.simularNuevo(Number(baja),Number(alta),Number(media));
+  //       let costos = this.simulacionService.simularNuevo(536,1072,804);
+  //       let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas-1000)*12)-60361);
+  //       this.array.push(simu);
+  //      this.iteraciones.push(`${i+1}`);
+  //       if(simu > 0){
+  //         this.exito ++;
+  //       }else{ 
+  //         this.fracaso ++;
+  //       }
+  //     }
+  //   }
+  // }
   simularVan(){
     const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
-    const totalGas = JSON.parse(localStorage.getItem('CostoOp')).total;
-
+    const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
     // console.log(ingresos, costos)
-    for(let j=0; j<10;j++){
-      for(let i=0; i<100;i++){
-        let ingresos = this.simulacionService.simularNuevo(Number(baja),Number(alta),Number(media));
-        let costos = this.simulacionService.simularNuevo(536,1072,804);
-        let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas-1000)*12)-60361);
-        this.array.push(simu);
-       this.iteraciones.push(`${i+1}`);
-        if(simu > 0){
-          this.exito ++;
-        }else{ 
-          this.fracaso ++;
-        }
+    for(let i=0; i<100;i++){
+      let ingresos = this.simulacionService.simularNuevo(Number(baja),Number(alta),Number(media));
+      let costos = this.simulacionService.simularNuevo(536,1072,804);
+      let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas-1000)*12)-60361);
+      if(simu > 0){
+        this.exito ++;
+      }else{ 
+        this.fracaso ++;
       }
     }
   }

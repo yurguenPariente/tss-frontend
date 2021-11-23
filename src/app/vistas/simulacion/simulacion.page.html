@@ -37,7 +37,7 @@
     </div>
     <div class="wrapper float-center" style="padding-left: 25px;">
         <button mat-flat-button color='primary' class="me-3 mb-3 " (click)="toggle() " [disabled]="miFormulario.invalid ">Sin simulacion</button>
-        <button mat-flat-button color='primary' class="me-3 mb-3 " (click)="simular() " [disabled]="miFormulario.invalid ">Simular</button>
+        <button mat-flat-button color='primary' class="me-3 mb-3 " (click)="simularVan() " [disabled]="miFormulario.invalid ">Simular</button>
     </div><br>
 
     <div style="padding-left: 25px; padding-top: 75px;">
@@ -55,15 +55,15 @@
         <h2> {{ titulo }} </h2>
         <ion-list style="margin-right: 25px;">
             <ion-item>
-                <ion-label>VAN: {{ resultados }}</ion-label>
+                <ion-label>VAN: {{ calcularVan() }}</ion-label>
             </ion-item>
             <div *ngIf="!apFlag">
                 <ion-item>
-                    <ion-label>Exitosos: {{ resultadosSim[1] }} ({{ resultadosSim[2] }}%)</ion-label>
+                    <ion-label>Exitosos: {{ exito }} ({{ resultadosSim[2] }}%)</ion-label>
                 </ion-item>
 
                 <ion-item>
-                    <ion-label>Fallidos: {{ resultadosSim[3] }} ({{ resultadosSim[4] }}%)</ion-label>
+                    <ion-label>Fallidos: {{ fracaso }} ({{ resultadosSim[4] }}%)</ion-label>
                 </ion-item>
 
             </div>
