@@ -147,5 +147,16 @@ export class SimulacionService {
     return res;
   }
 
+  hallarMedia(){
+
+  }
+
+  hallarDesviacion(){
+    
+  }
+
+  normalizarDatos(){
+
+  }
   
 }
