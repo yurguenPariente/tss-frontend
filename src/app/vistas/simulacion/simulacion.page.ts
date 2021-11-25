@@ -12,10 +12,12 @@ import { SimulacionService } from '../services/simulacion.service';
 export class SimulacionPage implements OnInit, AfterContentInit {
 
   datos:number[] = [];
-  norma: number[] = [-3.0,-2.9,-2.8,-2.7,-2.6,-2.5,-2.4,-2.3,-2.2,-2.1,-2.0,-1.9,-1.8,-1.7,-1.6,-1.5,-1.4,-1.3,-1.2,-1.1,-1.0,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0];
+  norma: number[] = [];
   arreglo:number[] = [];
   arreglo2:number[] = [];
   label:Label[] = [];
+  media:number = 0;
+  desviacion:number = 0;
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -65,6 +67,7 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   }
   
   ngAfterContentInit(): void {
+    this.norma = [-3.0,-2.9,-2.8,-2.7,-2.6,-2.5,-2.4,-2.3,-2.2,-2.1,-2.0,-1.9,-1.8,-1.7,-1.6,-1.5,-1.4,-1.3,-1.2,-1.1,-1.0,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0];
     this.simularVan();
     this.realizarNormalizacionDeDatos();
     this.barChartData = [
@@ -191,14 +194,13 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
     const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
     const costosA  = Number(localStorage.getItem('costosAnual'));
-    let sumatoria = 0;
     // console.log(ingresos, costos)
-    for(let i=0; i<10;i++){
-      let ingresos = this.simulacionService.simularNuevo(20000,30000,25000);
+    for(let i=0; i<1000;i++){
+      let ingresos = this.simulacionService.simularNuevo2(Number(baja),Number(alta),Number(media));
       //console.log(ingresos)
-      let costos = this.simulacionService.simularNuevo(1072,1608,1340);
+      let costos = this.simulacionService.simularNuevo2(536,1072,804);
       //console.log(costos)
-      let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((12510)*12)-60361);
+      let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas-1000)*12)-60361);
       //let simu = this.simulacionService.van2(0,0.1150,77049.15);
       this.datos.push(simu);
       if(simu > 0){
@@ -209,7 +211,6 @@ export class SimulacionPage implements OnInit, AfterContentInit {
       // console.log(ingresos);
       // //console.log(costos);
       //console.log(simu)
-      console.log(this.datos)
     }
    
   }
@@ -219,7 +220,6 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     for(let dato of arreglo){
       suma += dato;
     }
-    // console.log(suma/arreglo.length+1)
     return suma/arreglo.length;
   }
 
@@ -230,13 +230,7 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     for(let dato of arreglo){
       res += Math.pow(dato - media,2);
     }
-    if(normal){
-      // console.log(Math.sqrt(res/61))
-      return Math.sqrt(res/61);
-    }else{
-      // console.log(Math.sqrt(res/100))
-      return Math.sqrt(res/100-1);
-    }
+      return Math.sqrt(res/(arreglo.length));
   }
 
 
@@ -248,15 +242,15 @@ export class SimulacionPage implements OnInit, AfterContentInit {
       }else{
         this.arreglo.push(this.arreglo[i-1]+(desviacion/10))
       }
-    }
-    //console.log('creardatos',this.arreglo)
+    }    
   }
-
-  normalizarDatos(arreglo:number[]){
-    const media = this.hallarMedia(arreglo);
-    const desviacion = this.hallarDesviacion(arreglo,true);
+  
+  normalizarDatos(arreglo:number[],media:number,desviacion:number){
+    const e = 2.7182818284590452354;
+    const pi = 3.14159265358979323846;
     for(let dato of arreglo){
-      this.arreglo2.push((dato-media)/desviacion);
+      let normal = (1/(Math.sqrt(2*pi)*desviacion))*Math.pow(e,-((Math.pow(dato-media,2)/(2*desviacion*desviacion))));
+      this.arreglo2.push(normal);
     }
     //console.log('normalizardatos',this.arreglo2);
   }
@@ -266,13 +260,13 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     }
    // console.log('labe',this.label)
   }
-
+  
   realizarNormalizacionDeDatos(){
-    const media = this.hallarMedia(this.datos);
-    const desviacion = this.hallarDesviacion(this.datos,false);
-    this.crearDatos(media,desviacion);
-    this.normalizarDatos(this.arreglo);
-    this.convertirDatosenLabel(this.arreglo2);
+    this.media = this.hallarMedia(this.datos);
+    this.desviacion = this.hallarDesviacion(this.datos,false);
+    this.crearDatos(this.media,this.desviacion);
+    this.normalizarDatos(this.arreglo,this.media,this.desviacion);
+    this.convertirDatosenLabel(this.arreglo);
   }
 
   
