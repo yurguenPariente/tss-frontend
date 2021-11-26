@@ -12,17 +12,12 @@
 
     <div>
         <div>
-          <div style="display: block">
-            <canvas baseChart
-              [datasets]="barChartData"
-              [labels]="barChartLabels"
-              [options]="barChartOptions"
-              [legend]="barChartLegend"
-              [chartType]="barChartType">
+            <div style="display: block">
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
             </canvas>
-          </div>
+            </div>
         </div>
-      </div>
+    </div>
     <div style="padding-left: 25px" class="mt-2">
         <div *ngIf="apFlag">
             Sin simulacion, ingrese cuantos años quiere realizar el proyecto
@@ -37,6 +32,9 @@
         <ion-list style="margin-right: 25px;">
             <ion-item>
                 <ion-label>VAN Original: {{ calcularVan() }}</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>TIR Original: {{ calcularTir() }}%</ion-label>
             </ion-item>
             <div *ngIf="!apFlag">
                 <ion-item>
@@ -58,5 +56,5 @@
             </div>
         </ion-list>
     </div>
-   
+
 </ion-content>

@@ -10,7 +10,7 @@ import { SimulacionService } from '../services/simulacion.service';
   styleUrls: ['./simulacion.page.scss'],
 })
 export class SimulacionPage implements OnInit, AfterContentInit {
-
+  tir:any = 0;
   datos:number[] = [];
   norma: number[] = [];
   arreglo:number[] = [];
@@ -168,7 +168,17 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     const total  = JSON.parse(localStorage.getItem('ventasMes')).total;
     const costosA  = Number(localStorage.getItem('costosAnual'));
     const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
+    //this.calcularTir(total, costosA,totalGas);
     return this.simulacionService.van2(0,0.1150,(total-costosA)-((totalGas-1000)*12)-60361);
+  }
+  calcularTir(){    
+    // El primer valor es la inversion inicial 
+    const total  = JSON.parse(localStorage.getItem('ventasMes')).total;
+    const costosA  = Number(localStorage.getItem('costosAnual'));
+    const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;   
+    //this.tir = this.simulacionService.tir((total-costosA)-((totalGas-1000)*12)-60361);
+    
+    return this.simulacionService.tir((total-costosA)-((totalGas-1000)*12)-60361);
   }
   // simularVan(){
   //   const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
@@ -267,9 +277,6 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     this.crearDatos(this.media,this.desviacion);
     this.normalizarDatos(this.arreglo,this.media,this.desviacion);
     this.convertirDatosenLabel(this.arreglo);
-  }
-
-  
-  
+  }    
 
 }

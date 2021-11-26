@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Label } from 'ng2-charts';
+
+import { irr } from 'financial'
 @Injectable({
   providedIn: 'root'
 })
@@ -182,6 +184,29 @@ export class SimulacionService {
       }
     }
     return res;
+  }
+
+  tir(flujoA){
+    
+    const monto = Number(localStorage.getItem('monto'));
+    const flujos: number[] = [];
+    
+    if(monto){
+      flujos.push(monto);
+      //flujos.push(-150970);
+      for(let i=0; i<36 ; i++){
+        flujos.push(flujoA/12);
+        //flujos.push(5062);
+      }
+      // Uso irr(flujos[])
+      // Primer valor es la inversion inicial
+      // los demas valores son los flujos totales (Ganancias - Gastos)
+      //console.log("TIR: "+(irr(flujos)*100).toFixed(2)+"%");
+      console.log(flujos)
+      return ((irr(flujos)*100*12).toFixed(2));
+    }
+    
+    
   }
 
   hallarMedia(){
