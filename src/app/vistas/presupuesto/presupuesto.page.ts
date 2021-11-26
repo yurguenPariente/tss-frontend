@@ -56,7 +56,7 @@ export class PresupuestoPage implements OnInit {
     const local = localStorage.getItem('presupuesto');
     if(local){
       const objectlocal = JSON.parse(local);
-      try {
+
         this.form1 = this.fb.group({
           detalleEfectivo:[objectlocal.efectivo.detalle[0].detalle],
           procedenciaEfectivo:[objectlocal.efectivo.detalle[0].procedencia],
@@ -67,10 +67,7 @@ export class PresupuestoPage implements OnInit {
           detalleOtros:[objectlocal.efectivo.detalle[2].detalle],
           procedenciaOtros:[objectlocal.efectivo.detalle[2].procedencia],
           aporteOtros:[objectlocal.efectivo.detalle[2].aporte]
-        })
-      } catch (error) {
-        
-      }
+        });
       
     }
   }
