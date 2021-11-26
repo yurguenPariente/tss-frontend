@@ -19,7 +19,7 @@
       </form>
     </mat-step>
     
-    <mat-step>
+    <mat-step *ngIf="totales()">
       <ng-template matStepLabel>Terminar</ng-template>
       <p>Todo finalizado correctamente!!</p>
       <small>Totales</small>
