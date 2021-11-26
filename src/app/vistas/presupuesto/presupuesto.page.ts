@@ -16,15 +16,7 @@ export class PresupuestoPage implements OnInit {
   };
 
   form1: FormGroup = this.fb.group({
-    detalleEfectivo:[''],
-    procedenciaEfectivo:[''],
-    aporteEfectivo:[0],
-    detalleEntidad:[''],
-    procedenciaEntidad:[''],
-    aporteEntidad:[0],
-    detalleOtros:[''],
-    procedenciaOtros:[''],
-    aporteOtros:[0]
+    
   })
 
   constructor(private fb: FormBuilder, private presupuestoService:PresupuestoService) { }
@@ -56,7 +48,7 @@ export class PresupuestoPage implements OnInit {
     const local = localStorage.getItem('presupuesto');
     if(local){
       const objectlocal = JSON.parse(local);
-
+        console.log("local",objectlocal.efectivo.detalle[0])
         this.form1 = this.fb.group({
           detalleEfectivo:[objectlocal.efectivo.detalle[0].detalle],
           procedenciaEfectivo:[objectlocal.efectivo.detalle[0].procedencia],
