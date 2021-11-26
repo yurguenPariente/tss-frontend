@@ -10,6 +10,14 @@ import { SimulacionService } from '../services/simulacion.service';
   styleUrls: ['./simulacion.page.scss'],
 })
 export class SimulacionPage implements OnInit, AfterContentInit {
+
+  datos:number[] = [];
+  norma: number[] = [];
+  arreglo:number[] = [];
+  arreglo2:number[] = [];
+  label:Label[] = [];
+  media:number = 0;
+  desviacion:number = 0;
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -54,45 +62,47 @@ export class SimulacionPage implements OnInit, AfterContentInit {
    }
 
   ngOnInit() {
-    this.cargarDatos();
-    this.getDatosPresupuesto();
+    //this.cargarDatos();
+    //this.getDatosPresupuesto();
   }
-
+  
   ngAfterContentInit(): void {
+    this.norma = [-3.0,-2.9,-2.8,-2.7,-2.6,-2.5,-2.4,-2.3,-2.2,-2.1,-2.0,-1.9,-1.8,-1.7,-1.6,-1.5,-1.4,-1.3,-1.2,-1.1,-1.0,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0];
     this.simularVan();
+    this.realizarNormalizacionDeDatos();
     this.barChartData = [
-      { data: this.array, label: 'Series A' },
+      { data: this.arreglo2, label: 'Series A' },
     ];
-    this.barChartLabels = this.iteraciones;
+    this.barChartLabels = this.label;
   }
 
-  cargarDatos(){
-    const servicios = JSON.parse(localStorage.getItem('ventasMes'));
-    const inver = Number(localStorage.getItem('inver'));
-    const costosop = JSON.parse(localStorage.getItem('CostoOp'));
-    this.miFormulario = this.fb.group({
-      invInicial:[inver, Validators.required],
-      ganancias:[servicios.total,[Validators.required]],
-      salarios:[costosop.PagoaEmpleados,[Validators.required]],      
-      gastosBasicos:[this.sumarGastos(),[Validators.required]],      
-    });
+  // cargarDatos(){
+  //   const servicios = JSON.parse(localStorage.getItem('ventasMes'));
+  //   const inver = Number(localStorage.getItem('inver'));
+  //   const costosop = JSON.parse(localStorage.getItem('CostoOp'));
+  //   this.miFormulario = this.fb.group({
+  //     invInicial:[inver, Validators.required],
+  //     ganancias:[servicios.total,[Validators.required]],
+  //     salarios:[costosop.PagoaEmpleados,[Validators.required]],      
+  //     gastosBasicos:[this.sumarGastos(),[Validators.required]],      
+  //   });
 
-    this.miFormulario2 = this.fb.group({
-      anhosDelProyecto:[this.anhos.anhosDelProyecto,[Validators.required]], 
-    })
-  }
-  getDatosPresupuesto(){
-    let pres = JSON.parse(localStorage.getItem('presupuesto'));
-    console.log(pres);
-  }
-  sumarGastos(): number{
-    const local = localStorage.getItem('CostoOp');
-    if(local){
-      const localob = JSON.parse(local);
-      return localob.ServiciodeLuz + localob.ServiciodeAgua + localob.ServiciodeGas + 
-      localob.ServiciodeTelefono + localob.ServiciodeInternet;
-    }
-  }
+  //   this.miFormulario2 = this.fb.group({
+  //     anhosDelProyecto:[this.anhos.anhosDelProyecto,[Validators.required]], 
+  //   })
+  // }
+  // getDatosPresupuesto(){
+  //   let pres = JSON.parse(localStorage.getItem('presupuesto'));
+  //   console.log(pres);
+  // }
+  // sumarGastos(): number{
+  //   const local = localStorage.getItem('CostoOp');
+  //   if(local){
+  //     const localob = JSON.parse(local);
+  //     return localob.ServiciodeLuz + localob.ServiciodeAgua + localob.ServiciodeGas + 
+  //     localob.ServiciodeTelefono + localob.ServiciodeInternet;
+  //   }
+  // }
 
   simular() {
     this.apFlag = false;
@@ -183,17 +193,83 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   simularVan(){
     const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
     const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
+    const costosA  = Number(localStorage.getItem('costosAnual'));
     // console.log(ingresos, costos)
-    for(let i=0; i<100;i++){
-      let ingresos = this.simulacionService.simularNuevo(Number(baja),Number(alta),Number(media));
-      let costos = this.simulacionService.simularNuevo(536,1072,804);
+    for(let i=0; i<1000;i++){
+      let ingresos = this.simulacionService.simularNuevo2(Number(baja),Number(alta),Number(media));
+      //console.log(ingresos)
+      let costos = this.simulacionService.simularNuevo2(536,1072,804);
+      //console.log(costos)
       let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas-1000)*12)-60361);
+      //let simu = this.simulacionService.van2(0,0.1150,77049.15);
+      this.datos.push(simu);
       if(simu > 0){
         this.exito ++;
       }else{ 
         this.fracaso ++;
       }
+      // console.log(ingresos);
+      // //console.log(costos);
+      //console.log(simu)
     }
+   
   }
+
+  hallarMedia(arreglo:number[]):number{
+    let suma = 0;
+    for(let dato of arreglo){
+      suma += dato;
+    }
+    return suma/arreglo.length;
+  }
+
+
+  hallarDesviacion(arreglo:number[],normal:boolean):number{
+    let res = 0;
+    const media = this.hallarMedia(arreglo);
+    for(let dato of arreglo){
+      res += Math.pow(dato - media,2);
+    }
+      return Math.sqrt(res/(arreglo.length));
+  }
+
+
+
+  crearDatos(media:number, desviacion:number){
+    for(let i=0; i<this.norma.length;i++){
+      if(i === 0){
+        this.arreglo.push((media+(this.norma[i]*desviacion)));
+      }else{
+        this.arreglo.push(this.arreglo[i-1]+(desviacion/10))
+      }
+    }    
+  }
+  
+  normalizarDatos(arreglo:number[],media:number,desviacion:number){
+    const e = 2.7182818284590452354;
+    const pi = 3.14159265358979323846;
+    for(let dato of arreglo){
+      let normal = (1/(Math.sqrt(2*pi)*desviacion))*Math.pow(e,-((Math.pow(dato-media,2)/(2*desviacion*desviacion))));
+      this.arreglo2.push(normal);
+    }
+    //console.log('normalizardatos',this.arreglo2);
+  }
+  convertirDatosenLabel(arreglo:number[]){
+    for(let dato of arreglo){
+      this.label.push(`${dato}`);
+    }
+   // console.log('labe',this.label)
+  }
+  
+  realizarNormalizacionDeDatos(){
+    this.media = this.hallarMedia(this.datos);
+    this.desviacion = this.hallarDesviacion(this.datos,false);
+    this.crearDatos(this.media,this.desviacion);
+    this.normalizarDatos(this.arreglo,this.media,this.desviacion);
+    this.convertirDatosenLabel(this.arreglo);
+  }
+
+  
+  
 
 }

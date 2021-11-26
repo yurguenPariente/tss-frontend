@@ -77,7 +77,6 @@ export class CostosDirectosPage implements OnInit{
   }
 
   guardarLocal(){
-    this.costosService.Guardar();
     localStorage.setItem('costosAnual',this.costosAnual().toString())
   }
 
