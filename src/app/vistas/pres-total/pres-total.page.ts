@@ -54,7 +54,8 @@ export class PresTotalPage implements OnInit {
   }
   sumar(){
     const inver = this.apInv + this.apPropio - this.pres.efectivo.total;
-    localStorage.setItem('inver',inver.toString())
+    localStorage.setItem('inver',inver.toString());
+    localStorage.setItem('monto',(this.apInv - this.pres.efectivo.total).toString());
   }
 
 }

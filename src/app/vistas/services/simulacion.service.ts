@@ -127,10 +127,11 @@ export class SimulacionService {
 
   van2(inicial,interes,flujoA){
     let van = -inicial;
+    const monto = Number(localStorage.getItem('monto'));
     for(let i=0; i<36 ; i++){
       van += (flujoA/12) / Math.pow(1+(interes/12),i+1);
     }
-    return van-150970;
+    return van-monto;
   }
   randomA(){
     const arreglo = [3,11,13,19,21,27,29,37,53,59,61,67,69,77,83,91];
