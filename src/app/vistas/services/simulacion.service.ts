@@ -192,7 +192,7 @@ export class SimulacionService {
     const flujos: number[] = [];
     
     if(monto){
-      flujos.push(monto);
+      flujos.push(-monto);
       //flujos.push(-150970);
       for(let i=0; i<36 ; i++){
         flujos.push(flujoA/12);
