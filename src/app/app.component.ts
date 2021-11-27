@@ -12,6 +12,7 @@ export class AppComponent {
     { title: 'Costos', url: '/vistas/costos', icon: 'flag' },
     { title: 'Costos Directos', url: '/vistas/costos/costos-directos', icon: 'send' },
     { title: 'Flujo', url: '/vistas/flujo/', icon:'laptop' },
+    { title: 'Flujo1', url: '/vistas/flujo-acumulado/', icon:'laptop' },
     { title: 'Costos Operativos', url: '/vistas/costo-opera/', icon:'business' },
   ];
   constructor() {}
