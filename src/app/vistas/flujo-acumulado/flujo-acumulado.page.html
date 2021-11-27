@@ -8,6 +8,40 @@
 </ion-header>
 
 <ion-content>
+  <form class="example-form mt-2" [formGroup]="miFormulario">
+  <p>DATOS DEL CREDITO</p>
+  <P>
+
+  </P>
+  <P>frecuencia</P>
+  <select name="select" formControlName='tipo'>
+    <option value="12">MES</option>
+    <option value="6" >Bimensual</option>
+    <option value="4">trimestral</option>
+    <option value="3">Cuatrimestral</option>
+    <option value="2">Semestral</option>
+    <option value="1">Anual</option>
+  </select>
+  
+  <P>
+
+  </P>
+  <P>Plazo(meses)</P>
+  <input type="number" max="36" />
+  <P>
+
+  </P>
+  <P>Tasa de interés:</P>
+  <input type="number" placeholder="11.50" value="11.50" readonly>
+  <P>
+
+  </P>
+  <P>Actividad:</P>
+  <input type="text" placeholder="SERVICIOS" readonly>
+  <P>
+
+  </P>
+</form>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
 
     <!--- Note that these columns can be defined in any order.
