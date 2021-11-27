@@ -15,7 +15,20 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   norma: number[] = [];
   arreglo:number[] = [];
   arreglo2:number[] = [];
+  ingresos:number[] = [];
+  costos: number [] = [];
   label:Label[] = [];
+
+  labelTir: Label[] = [];
+  iteraciones: Label[] = [];
+  mediaTir: number;
+  desviacionTir: number;
+  tirs: number[] = [];
+  normaTir: number [] = [];
+  arregloTirs: number[] =[];
+  exito:number = 0;
+  fracaso: number = 0;
+  array: number[] = [];
   media:number = 0;
   desviacion:number = 0;
   public barChartOptions: ChartOptions = {
@@ -29,15 +42,14 @@ export class SimulacionPage implements OnInit, AfterContentInit {
       }
     }
   };
-  exito:number = 0;
-  fracaso: number = 0;
-  array: number[] = [];
-  iteraciones: Label[] = [];
-    public barChartData: ChartDataSets[] = [
-    
-  ];
 
+  public barChartData: ChartDataSets[] = [];
+  public barChartData2: ChartDataSets[] =[];
+  public barChartData4: ChartDataSets[] =[];
+  public barChartLabels3: Label[] = [];
+  public barChartLabels2: Label[] = [];
   public barChartLabels: Label[] = [];
+  public barChartData3: ChartDataSets[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   miFormulario: FormGroup;
@@ -70,10 +82,22 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     this.norma = [-3.0,-2.9,-2.8,-2.7,-2.6,-2.5,-2.4,-2.3,-2.2,-2.1,-2.0,-1.9,-1.8,-1.7,-1.6,-1.5,-1.4,-1.3,-1.2,-1.1,-1.0,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0];
     this.simularVan();
     this.realizarNormalizacionDeDatos();
+    this.realizarNormalizacionTir();
     this.barChartData = [
-      { data: this.arreglo2, label: 'Series A' },
+      { data: this.arreglo2, label: 'VAN' },
+    ];
+    this.barChartData2 = [
+      {data: this.ingresos, label: 'Ingresos'}
+    ];
+    this.barChartData3 = [
+      { data: this.costos, label:'Costos'}
+    ];
+    this.barChartData4 = [
+      { data: this.arregloTirs, label:'TIR'}
     ];
     this.barChartLabels = this.label;
+    this.barChartLabels2 = this.iteraciones;
+    this.barChartLabels3 = this.labelTir;
   }
 
   // cargarDatos(){
@@ -169,7 +193,7 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     const costosA  = Number(localStorage.getItem('costosAnual'));
     const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
     //this.calcularTir(total, costosA,totalGas);
-    return this.simulacionService.van2(0,0.1150,(total-costosA)-((totalGas-1000)*12)-60361);
+    return this.simulacionService.van2(0,0.1150,(total-costosA)-((totalGas)*12)-60361);
   }
   calcularTir(){    
     // El primer valor es la inversion inicial 
@@ -178,51 +202,29 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;   
     //this.tir = this.simulacionService.tir((total-costosA)-((totalGas-1000)*12)-60361);
     
-    return this.simulacionService.tir((total-costosA)-((totalGas-1000)*12)-60361);
+    return this.simulacionService.tir((total-costosA)-((totalGas)*12)-60361);
   }
-  // simularVan(){
-  //   const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
-  //   const totalGas = JSON.parse(localStorage.getItem('CostoOp')).total;
-
-  //   // console.log(ingresos, costos)
-  //   for(let j=0; j<10;j++){
-  //     for(let i=0; i<100;i++){
-  //       let ingresos = this.simulacionService.simularNuevo(Number(baja),Number(alta),Number(media));
-  //       let costos = this.simulacionService.simularNuevo(536,1072,804);
-  //       let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas-1000)*12)-60361);
-  //       this.array.push(simu);
-  //      this.iteraciones.push(`${i+1}`);
-  //       if(simu > 0){
-  //         this.exito ++;
-  //       }else{ 
-  //         this.fracaso ++;
-  //       }
-  //     }
-  //   }
-  // }
+ 
   simularVan(){
     const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
     const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
     const costosA  = Number(localStorage.getItem('costosAnual'));
-    // console.log(ingresos, costos)
-    for(let i=0; i<1000;i++){
+    for(let i=0; i<500;i++){
       let ingresos = this.simulacionService.simularNuevo2(Number(baja),Number(alta),Number(media));
-      //console.log(ingresos)
       let costos = this.simulacionService.simularNuevo2(536,1072,804);
-      //console.log(costos)
-      let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas-1000)*12)-60361);
-      //let simu = this.simulacionService.van2(0,0.1150,77049.15);
+      let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas)*12)-60361);
+      let tir = this.simulacionService.tir((ingresos-costos)-((totalGas)*12)-60361);
+      this.tirs.push(Number(tir));
+      this.ingresos.push(ingresos);
+      this.costos.push(costos);
+      this.iteraciones.push(`${i+1}`);
       this.datos.push(simu);
       if(simu > 0){
         this.exito ++;
       }else{ 
         this.fracaso ++;
       }
-      // console.log(ingresos);
-      // //console.log(costos);
-      //console.log(simu)
-    }
-   
+    }   
   }
 
   hallarMedia(arreglo:number[]):number{
@@ -234,7 +236,7 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   }
 
 
-  hallarDesviacion(arreglo:number[],normal:boolean):number{
+  hallarDesviacion(arreglo:number[]):number{
     let res = 0;
     const media = this.hallarMedia(arreglo);
     for(let dato of arreglo){
@@ -245,38 +247,45 @@ export class SimulacionPage implements OnInit, AfterContentInit {
 
 
 
-  crearDatos(media:number, desviacion:number){
+  crearDatos(media:number, desviacion:number,arreglo:number[]){
     for(let i=0; i<this.norma.length;i++){
       if(i === 0){
-        this.arreglo.push((media+(this.norma[i]*desviacion)));
+        arreglo.push((media+(this.norma[i]*desviacion)));
       }else{
-        this.arreglo.push(this.arreglo[i-1]+(desviacion/10))
+        arreglo.push(arreglo[i-1]+(desviacion/10))
       }
     }    
   }
   
-  normalizarDatos(arreglo:number[],media:number,desviacion:number){
+  normalizarDatos(arreglo:number[],media:number,desviacion:number,arregloG:number[]){
     const e = 2.7182818284590452354;
     const pi = 3.14159265358979323846;
     for(let dato of arreglo){
       let normal = (1/(Math.sqrt(2*pi)*desviacion))*Math.pow(e,-((Math.pow(dato-media,2)/(2*desviacion*desviacion))));
-      this.arreglo2.push(normal);
+      arregloG.push(normal);
     }
     //console.log('normalizardatos',this.arreglo2);
   }
-  convertirDatosenLabel(arreglo:number[]){
+  convertirDatosenLabel(arreglo:number[],arregloG:Label[]){
     for(let dato of arreglo){
-      this.label.push(`${dato}`);
+      arregloG.push(`${dato}`);
     }
    // console.log('labe',this.label)
   }
   
   realizarNormalizacionDeDatos(){
     this.media = this.hallarMedia(this.datos);
-    this.desviacion = this.hallarDesviacion(this.datos,false);
-    this.crearDatos(this.media,this.desviacion);
-    this.normalizarDatos(this.arreglo,this.media,this.desviacion);
-    this.convertirDatosenLabel(this.arreglo);
+    this.desviacion = this.hallarDesviacion(this.datos);
+    this.crearDatos(this.media,this.desviacion,this.arreglo);
+    this.normalizarDatos(this.arreglo,this.media,this.desviacion,this.arreglo2);
+    this.convertirDatosenLabel(this.arreglo,this.label);
+  }
+  realizarNormalizacionTir(){
+    this.mediaTir = this.hallarMedia(this.tirs);
+    this.desviacionTir = this.hallarDesviacion(this.tirs);
+    this.crearDatos(this.mediaTir,this.desviacionTir,this.normaTir);
+    this.normalizarDatos(this.normaTir,this.mediaTir,this.desviacionTir,this.arregloTirs);
+    this.convertirDatosenLabel(this.normaTir,this.labelTir);
   }    
 
 }

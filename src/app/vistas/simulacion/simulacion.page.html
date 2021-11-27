@@ -13,7 +13,32 @@
     <div>
         <div>
             <div style="display: block">
+                <canvas baseChart [datasets]="barChartData3" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        <div>
+            <div style="display: block">
+                <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div style="display: block">
                 <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div style="display: block">
+                <canvas baseChart [datasets]="barChartData4" [labels]="barChartLabels3" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
             </canvas>
             </div>
         </div>
@@ -46,11 +71,19 @@
                 </ion-item>
 
                 <ion-item>
-                    <ion-label>Media del Van: {{media | number}}</ion-label>
+                    <ion-label>Media VAN: {{media | number}}</ion-label>
                 </ion-item>
 
                 <ion-item>
-                    <ion-label>Desviacion estandar del Van: {{desviacion | number}}</ion-label>
+                    <ion-label>Desviacion VAN: {{desviacion | number}}</ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Media TIR: {{mediaTir | number}} %</ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Desviacion TIR: {{desviacionTir | number}} %</ion-label>
                 </ion-item>
 
             </div>
