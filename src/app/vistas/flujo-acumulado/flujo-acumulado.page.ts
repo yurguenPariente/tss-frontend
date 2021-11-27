@@ -18,6 +18,8 @@ export class FlujoAcumuladoPage implements OnInit, AfterContentInit {
     resultadoVan:number = 0;
     exito:number = 0;
     fracaso: number = 0;
+    constructor(private simulacionService:SimulacionService) { }
+    
     ELEMENT_DATA: Opcion[] = [
       {nombre:'Inversion Inicial',valor:200},
       {nombre:'Saldo Inicial',valor:500},
@@ -30,8 +32,6 @@ export class FlujoAcumuladoPage implements OnInit, AfterContentInit {
       {nombre:'Flujo Acumulado',valor:(this.total-this.costosA)-((this.totalGas)*12)-60361}
     
   ];
-  constructor(private simulacionService:SimulacionService) { }
-
   ngAfterContentInit(): void {
 
   }
