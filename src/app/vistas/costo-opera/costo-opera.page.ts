@@ -49,9 +49,28 @@ export class CostoOperaPage implements OnInit {
   // constructor() { }
 
   ngOnInit() {
-    //this.leer();
-    // this.miFormulario = 
-      
+    this.leer();
+    this.miFormulario = this.fb.group({
+   
+    Impuestos:[this.CostoOp.Impuestos, [Validators.required,Validators.max(1000000)]],
+    Alimentacion: [this.CostoOp.Alimentacion,[Validators.required,Validators.max(1000000)]],
+   ServiciodeLuz: [this.CostoOp.ServiciodeLuz,[Validators.required,Validators.max(1000000)]],
+    ServiciodeAgua: [this.CostoOp.ServiciodeAgua,[Validators.required,Validators.max(1000000)]],
+   ServiciodeGas: [this.CostoOp.ServiciodeGas,[Validators.required,Validators.max(1000000)]],
+    ServiciodeTelefono: [this.CostoOp.ServiciodeTelefono,[Validators.required,Validators.max(1000000)]],
+    ServiciodeInternet: [this.CostoOp.ServiciodeInternet,[Validators.required,Validators.max(1000000)]],
+    Alquiler: [this.CostoOp.Alquiler,[Validators.required,Validators.max(1000000)]],
+    Transporte: [this.CostoOp.Transporte,[Validators.required,Validators.max(1000000)]],
+    MaterialdeEscritorio: [this.CostoOp.MaterialdeEscritorio,[Validators.required,Validators.max(1000000)]],
+    PagoaEmpleados: [this.CostoOp.PagoaEmpleados,[Validators.required,Validators.max(1000000)]],
+    Promoción: [this.CostoOp.Promoción,[Validators.required,Validators.max(1000000)]],
+    Mantenimiento: [this.CostoOp.Mantenimiento,[Validators.required,Validators.max(1000000)]],
+    Vestimenta: [this.CostoOp.Vestimenta,[Validators.required,Validators.max(1000000)]],
+    Salud: [this.CostoOp. Salud,[Validators.required,Validators.max(1000000)]],
+    total: [this.CostoOp.total,[Validators.required,Validators.max(1000000)]]
+
+
+    })
       
      
   }
@@ -89,6 +108,12 @@ export class CostoOperaPage implements OnInit {
     }
     localStorage.setItem('CostoOp',JSON.stringify(this.CostoOp));
     
+  }
+  leer(){
+    const valorLocal = localStorage.getItem('CostoOp');
+    if(valorLocal){
+      this.CostoOp = JSON.parse(valorLocal);
+    }
   }
 
 }
