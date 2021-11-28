@@ -202,7 +202,7 @@ export class SimulacionService {
       // Primer valor es la inversion inicial
       // los demas valores son los flujos totales (Ganancias - Gastos)
       //console.log("TIR: "+(irr(flujos)*100).toFixed(2)+"%");
-      console.log(flujos)
+      //console.log(flujos)
       return ((irr(flujos)*100*12).toFixed(2));
     }
     
