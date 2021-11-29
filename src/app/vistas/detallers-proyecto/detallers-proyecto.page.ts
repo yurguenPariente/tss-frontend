@@ -30,19 +30,12 @@ export class DetallersProyectoPage implements OnInit {
   }
 
   obtenerDatos(){
-    var datos:Proyecto = JSON.parse(localStorage.getItem("detallesProyecto")); 
-    console.log("datos "+datos);
+    var datos:Proyecto = JSON.parse(localStorage.getItem("detallesProyecto"));     
     if(datos){
       try {
-        /*this.proyecto.nombre = datos.nombre;
-        this.proyecto.direccion = datos.direccion;
-        this.proyecto.nit = datos.nit;
-        this.proyecto.representante = datos.representante;*/
-        this.proyecto = datos;
-       
-        
+        this.proyecto = datos;               
       } catch (error) {
-        
+        console.log(error);
       }
     }
     

@@ -13,7 +13,9 @@ export class PresupuestoPage implements OnInit {
     detalle:'',
     procedencia:'',
     aporte:0
-  };
+  };  
+
+  constructor(private fb: FormBuilder, private presupuestoService:PresupuestoService) { }
 
   form1: FormGroup = this.fb.group({
     detalleEfectivo:[''],
@@ -24,10 +26,8 @@ export class PresupuestoPage implements OnInit {
     aporteEntidad:[0],
     detalleOtros:[''],
     procedenciaOtros:[''],
-    aporteOtros:[0]
+    aporteOtros:[0] 
   })
-
-  constructor(private fb: FormBuilder, private presupuestoService:PresupuestoService) { }
 
   guardarEfectivo(){
     const {detalleEfectivo,procedenciaEfectivo,aporteEfectivo,detalleEntidad,
@@ -54,25 +54,27 @@ export class PresupuestoPage implements OnInit {
   }
   leerLocal(){
     const local = localStorage.getItem('presupuesto');
-    if(local){
-      const objectlocal = JSON.parse(local);
-      try {
-        this.form1 = this.fb.group({
-          detalleEfectivo:[objectlocal.efectivo.detalle[0].detalle],
-          procedenciaEfectivo:[objectlocal.efectivo.detalle[0].procedencia],
-          aporteEfectivo:[objectlocal.efectivo.detalle[0].aporte],
-          detalleEntidad:[objectlocal.efectivo.detalle[1].detalle],
-          procedenciaEntidad:[objectlocal.efectivo.detalle[1].procedencia],
-          aporteEntidad:[objectlocal.efectivo.detalle[1].aporte],
-          detalleOtros:[objectlocal.efectivo.detalle[2].detalle],
-          procedenciaOtros:[objectlocal.efectivo.detalle[2].procedencia],
-          aporteOtros:[objectlocal.efectivo.detalle[2].aporte]
-        })
-      } catch (error) {
+    try {
+      if(local){
+        const objectlocal = JSON.parse(local);
+          console.log("local",objectlocal.efectivo.detalle[0])
+          this.form1 = this.fb.group({
+            detalleEfectivo:[objectlocal.efectivo.detalle[0].detalle],
+            procedenciaEfectivo:[objectlocal.efectivo.detalle[0].procedencia],
+            aporteEfectivo:[objectlocal.efectivo.detalle[0].aporte],
+            detalleEntidad:[objectlocal.efectivo.detalle[1].detalle],
+            procedenciaEntidad:[objectlocal.efectivo.detalle[1].procedencia],
+            aporteEntidad:[objectlocal.efectivo.detalle[1].aporte],
+            detalleOtros:[objectlocal.efectivo.detalle[2].detalle],
+            procedenciaOtros:[objectlocal.efectivo.detalle[2].procedencia],
+            aporteOtros:[objectlocal.efectivo.detalle[2].aporte]
+          });
         
       }
-      
+    } catch (error) {
+      console.log(error);
     }
+   
   }
   sumarTotal1():number{
     return this.form1.get('aporteEfectivo').value + this.form1.get('aporteEntidad').value + this.form1.get('aporteOtros').value

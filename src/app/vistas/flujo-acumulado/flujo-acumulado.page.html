@@ -68,8 +68,11 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
   <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="guardar()"
   [disabled]="miFormulario.invalid" routerLink='/vistas/simulacion'>guardar</button>
-  
+
+  <button mat-flat-button color="primary" routerLink='/vistas/simulacion' class="m-3 float-end">Realizar Simulacion</button>
+
 
 </ion-content>

@@ -21,6 +21,7 @@ export class FlujoAcumuladoPage implements OnInit, AfterContentInit {
     resultadoVan:number = 0;
     exito:number = 0;
     fracaso: number = 0;
+    
     ELEMENT_DATA: Opcion[] = [
       {nombre:'Inversion Inicial',valor:200},
       {nombre:'Saldo Inicial',valor:500},

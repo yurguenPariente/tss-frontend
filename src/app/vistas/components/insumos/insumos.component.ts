@@ -124,6 +124,8 @@ export class InsumosComponent implements OnInit {
   guardarDatos(){
     let arreglo2: Insumo[]=[];
     this.totales = [];
+    const nombres = localStorage.getItem('servicios').split(',');
+    console.log(nombres)
     for(let insumo of this.insumos.value){
       this.insu = {
         nombre: insumo.insumo,
@@ -139,6 +141,9 @@ export class InsumosComponent implements OnInit {
     this.insumosArreglo = arreglo2;
     this.guardarProducto();
     this.costosService.guardarProductos(this.producto, this.indice);
+    if(this.indice+1 === nombres.length){
+      this.costosService.Guardar();
+    }
   }
   guardarProducto(){
     const {tipo, cantidad1,unidadV,frecuencia,precioV} = this.miFormulario.value;

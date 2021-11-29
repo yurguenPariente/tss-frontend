@@ -40,7 +40,6 @@ export class CostosDirectosPage implements OnInit{
     
   ngOnInit() {
    this.modal();
-   this.totales();
   }
 
   modal(){
@@ -52,10 +51,13 @@ export class CostosDirectosPage implements OnInit{
       this.crearGrupos();
     }
   }
-  totales(){
+  totales():boolean{
     if(localStorage.getItem('ventasMes') && localStorage.getItem('costosDirectos')){
       this.totalVentas = JSON.parse(localStorage.getItem('ventasMes')).total;
       this.mub = JSON.parse(localStorage.getItem('costosDirectos')).mubTotal*100; 
+      return true;
+    }else{
+      return false;
     }
   }
   crearGrupos(){
@@ -77,7 +79,6 @@ export class CostosDirectosPage implements OnInit{
   }
 
   guardarLocal(){
-    this.costosService.Guardar();
     localStorage.setItem('costosAnual',this.costosAnual().toString())
   }
 

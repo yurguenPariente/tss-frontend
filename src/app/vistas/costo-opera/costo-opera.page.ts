@@ -44,11 +44,12 @@ export class CostoOperaPage implements OnInit {
     Vestimenta: [ 0, [ Validators.max(1000000)]],
     Salud: [ 0, [ Validators.max(1000000)]],
     total: [ 0, [ Validators.max(1000000)]]
-  })
+  });
   constructor(private fb: FormBuilder) { }
   // constructor() { }
 
   ngOnInit() {
+
     this.leer();
     this.miFormulario = this.fb.group({
    
@@ -71,8 +72,7 @@ export class CostoOperaPage implements OnInit {
 
 
     })
-      
-     
+
   }
    sumar():number{
      return Number(this.miFormulario.get('Impuestos').value) + Number(this.miFormulario.get('Alimentacion').value)+
@@ -84,7 +84,33 @@ export class CostoOperaPage implements OnInit {
      +Number(this.miFormulario.get('Mantenimiento').value) +Number(this.miFormulario.get('Vestimenta').value) 
      +Number(this.miFormulario.get('Salud').value)  
    }
- 
+   
+   leer(){
+     const local = localStorage.getItem('CostoOp');
+     if(local){
+      const {Impuestos, Alimentacion, ServiciodeLuz,ServiciodeAgua,ServiciodeGas,ServiciodeTelefono,ServiciodeInternet,
+      Alquiler,Transporte, MaterialdeEscritorio,PagoaEmpleados,Promoción,Mantenimiento,Vestimenta,Salud,total} =  JSON.parse(local);
+      this.miFormulario = this.fb.group({
+        Impuestos: [ Impuestos, [ Validators.max(1000000)]],
+        Alimentacion: [Alimentacion, [ Validators.max(1000000)]],
+       ServiciodeLuz: [ ServiciodeLuz, [ Validators.max(1000000)]],
+        ServiciodeAgua:[ ServiciodeAgua, [ Validators.max(1000000)]],
+       ServiciodeGas: [ ServiciodeGas, [ Validators.max(1000000)]],
+        ServiciodeTelefono:[ ServiciodeTelefono, [ Validators.max(1000000)]],
+        ServiciodeInternet:[ ServiciodeInternet, [ Validators.max(1000000)]],
+        Alquiler: [Alquiler, [ Validators.max(1000000)]],
+        Transporte: [ Transporte, [ Validators.max(1000000)]],
+        MaterialdeEscritorio: [ MaterialdeEscritorio, [ Validators.max(1000000)]],
+        PagoaEmpleados: [ PagoaEmpleados,  [Validators.max(1000000)]],
+        Promoción:[ Promoción, [ Validators.max(1000000)]],
+        Mantenimiento: [ Mantenimiento, [ Validators.max(1000000)]],
+        Vestimenta: [ Vestimenta, [ Validators.max(1000000)]],
+        Salud: [ Salud, [ Validators.max(1000000)]],
+        total: [ total, [ Validators.max(1000000)]]
+      });
+      
+     }
+   }
    guardar(){
     this.CostoOp = {
         
