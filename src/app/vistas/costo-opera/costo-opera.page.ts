@@ -135,7 +135,7 @@ export class CostoOperaPage implements OnInit {
     localStorage.setItem('CostoOp',JSON.stringify(this.CostoOp));
     
   }
-  leer(){
+  leer2(){
     const valorLocal = localStorage.getItem('CostoOp');
     if(valorLocal){
       this.CostoOp = JSON.parse(valorLocal);

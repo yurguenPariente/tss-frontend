@@ -189,42 +189,49 @@ export class SimulacionPage implements OnInit, AfterContentInit {
       40 ];
   }
   calcularVan(): number{
-    const total  = JSON.parse(localStorage.getItem('ventasMes')).total;
-    const costosA  = Number(localStorage.getItem('costosAnual'));
-    const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
-    //this.calcularTir(total, costosA,totalGas);
-    return this.simulacionService.van2(0,0.1150,(total-costosA)-((totalGas)*12)-60361);
+    if(localStorage.getItem('ventasMes') && localStorage.getItem('costosAnual') && localStorage.getItem('CostoOp')){
+
+      const total  = JSON.parse(localStorage.getItem('ventasMes')).total;
+      const costosA  = Number(localStorage.getItem('costosAnual'));
+      const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
+      //this.calcularTir(total, costosA,totalGas);
+      return this.simulacionService.van2(0,0.1150,(total-costosA)-((totalGas)*12)-60361);
+    }
   }
-  calcularTir(){    
+  calcularTir(){ 
+    if(localStorage.getItem('ventasMes') && localStorage.getItem('costosAnual') && localStorage.getItem('CostoOp')){
+      const total  = JSON.parse(localStorage.getItem('ventasMes')).total;
+      const costosA  = Number(localStorage.getItem('costosAnual'));
+      const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;   
+      //this.tir = this.simulacionService.tir((total-costosA)-((totalGas-1000)*12)-60361);      
+      return this.simulacionService.tir((total-costosA)-((totalGas)*12)-60361);
+    }   
     // El primer valor es la inversion inicial 
-    const total  = JSON.parse(localStorage.getItem('ventasMes')).total;
-    const costosA  = Number(localStorage.getItem('costosAnual'));
-    const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;   
-    //this.tir = this.simulacionService.tir((total-costosA)-((totalGas-1000)*12)-60361);
-    
-    return this.simulacionService.tir((total-costosA)-((totalGas)*12)-60361);
   }
  
   simularVan(){
-    const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
-    const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
-    const costosA  = Number(localStorage.getItem('costosAnual'));
-    for(let i=0; i<500;i++){
-      let ingresos = this.simulacionService.simularNuevo2(Number(baja),Number(alta),Number(media));
-      let costos = this.simulacionService.simularNuevo2(536,1072,804);
-      let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas)*12)-60361);
-      let tir = this.simulacionService.tir((ingresos-costos)-((totalGas)*12)-60361);
-      this.tirs.push(Number(tir));
-      this.ingresos.push(ingresos);
-      this.costos.push(costos);
-      this.iteraciones.push(`${i+1}`);
-      this.datos.push(simu);
-      if(simu > 0){
-        this.exito ++;
-      }else{ 
-        this.fracaso ++;
-      }
-    }   
+    if(localStorage.getItem('ventasMes') && localStorage.getItem('costosAnual') && localStorage.getItem('CostoOp')){
+
+      const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
+      const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
+      const costosA  = Number(localStorage.getItem('costosAnual'));
+      for(let i=0; i<500;i++){
+        let ingresos = this.simulacionService.simularNuevo2(Number(baja),Number(alta),Number(media));
+        let costos = this.simulacionService.simularNuevo2(536,1072,804);
+        let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas)*12)-60361);
+        let tir = this.simulacionService.tir((ingresos-costos)-((totalGas)*12)-60361);
+        this.tirs.push(Number(tir));
+        this.ingresos.push(ingresos);
+        this.costos.push(costos);
+        this.iteraciones.push(`${i+1}`);
+        this.datos.push(simu);
+        if(simu > 0){
+          this.exito ++;
+        }else{ 
+          this.fracaso ++;
+        }
+      }   
+    }
   }
 
   hallarMedia(arreglo:number[]):number{
