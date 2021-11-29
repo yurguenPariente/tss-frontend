@@ -27,17 +27,22 @@
 
   </P>
   <P>Plazo(meses)</P>
-  <input type="number" max="36" />
+  <input type="number" max="36" formControlName='plazo'/>
   <P>
-
+    <P>Monto</P>
+    <input type="number" max="36" formControlName='monto'/>
+    <P>
   </P>
   <P>Tasa de interés:</P>
-  <input type="number" placeholder="11.50" value="11.50" readonly>
+  <input type="number" placeholder="11.50" value="11.50" readonly formControlName='tasa'>
   <P>
 
   </P>
   <P>Actividad:</P>
   <input type="text" placeholder="SERVICIOS" readonly>
+  <P>
+
+  </P>
   <P>
 
   </P>
@@ -63,7 +68,11 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="guardar()"
+  [disabled]="miFormulario.invalid" routerLink='/vistas/simulacion'>guardar</button>
+
   <button mat-flat-button color="primary" routerLink='/vistas/simulacion' class="m-3 float-end">Realizar Simulacion</button>
-  
+
 
 </ion-content>
