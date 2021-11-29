@@ -8,44 +8,51 @@
 </ion-header>
 
 <ion-content>
-  <form class="example-form mt-2" [formGroup]="miFormulario">
-  <p>DATOS DEL CREDITO</p>
-  <P>
-
-  </P>
-  <P>frecuencia</P>
-  <select name="select" formControlName='tipo'>
-    <option value="12">MES</option>
-    <option value="6" >Bimensual</option>
-    <option value="4">trimestral</option>
-    <option value="3">Cuatrimestral</option>
-    <option value="2">Semestral</option>
-    <option value="1">Anual</option>
-  </select>
-  
-  <P>
-
-  </P>
-  <P>Plazo(meses)</P>
-  <input type="number" max="36" formControlName='plazo'/>
-  <P>
-    <P>Monto</P>
-    <input type="number" max="36" formControlName='monto'/>
-    <P>
-  </P>
-  <P>Tasa de interés:</P>
-  <input type="number" placeholder="11.50" value="11.50" readonly formControlName='tasa'>
-  <P>
-
-  </P>
-  <P>Actividad:</P>
-  <input type="text" placeholder="SERVICIOS" readonly>
-  <P>
-
-  </P>
-  <P>
-
-  </P>
+  <form class="example-form mt-2 p-3" [formGroup]="miFormulario">
+  <h3 class="text-center">DATOS DEL CREDITO</h3>
+    <div class="row">
+      <div class="col-6">
+        <P>Frecuencia</P>
+          <mat-form-field class="selector" appearance="fill">
+            <mat-label>Hoja de costos directos</mat-label>
+            <mat-select  name="options"  formControlName='tipo' (selectionChange)="encontrarCuota()">
+              <mat-option *ngFor="let option of opciones" [value]="option.valor">
+                {{option.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="col-6">
+        <P>Plazo(meses)</P>
+          <mat-form-field  class="example-full-width" appearance="fill">
+            <mat-label>Plazo</mat-label>
+            <input matInput type="number" max="36" min="1" formControlName='plazo' (change)="encontrarCuota()"/>
+          </mat-form-field>
+          <P>
+      </div>
+      <div class="col-6">
+        <P>Monto</P>
+        <mat-form-field  class="example-full-width" appearance="fill"> 
+          <mat-label>Monto</mat-label>
+        <input type="number" matInput [min]="monto" [max]="monto" formControlName='monto'/>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <P>Tasa de interés:</P>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Tasa de interes</mat-label>
+          <input type="number" matInput min="11.5" max="11.5" formControlName='tasa'>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <P>Actividad:</P>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Actividad</mat-label>
+        <input type="text" matInput value="SERVICIOS" readonly>
+        </mat-form-field> 
+      </div>
+    </div>
+ 
 </form>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
 
@@ -69,10 +76,8 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <button mat-flat-button color='primary' class="float-end me-3 mb-3" (click)="guardar()"
-  [disabled]="miFormulario.invalid" routerLink='/vistas/simulacion'>guardar</button>
 
-  <button mat-flat-button color="primary" routerLink='/vistas/simulacion' class="m-3 float-end">Realizar Simulacion</button>
+  <button mat-flat-button color="primary" (click)="guardar()" routerLink='/vistas/simulacion' class="m-3 float-end">Realizar Simulacion</button>
 
 
 </ion-content>

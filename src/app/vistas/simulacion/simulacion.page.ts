@@ -209,7 +209,7 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
     const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
     const costosA  = Number(localStorage.getItem('costosAnual'));
-    for(let i=0; i<500;i++){
+    for(let i=0; i<1000;i++){
       let ingresos = this.simulacionService.simularNuevo2(Number(baja),Number(alta),Number(media));
       let costos = this.simulacionService.simularNuevo2(536,1072,804);
       let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas)*12)-60361);
