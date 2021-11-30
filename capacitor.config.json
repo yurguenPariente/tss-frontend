@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "Plan de Negocio",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "io.ionic.starter",
+  "appName": "Plan de Negocio",
+  "webDir": "www",
+  "bundledWebRuntime": false
 }
