@@ -4,6 +4,7 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { PresupuestoService } from '../services/presupuesto.service';
 import { SimulacionService } from '../services/simulacion.service';
+import { PdfService } from '../services/pdf.service';
 @Component({
   selector: 'app-simulacion',
   templateUrl: './simulacion.page.html',
@@ -68,7 +69,7 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   anhos: any = {
     anhosDelProyecto:0
   }
-  constructor(private fb: FormBuilder, private simularService: SimulacionService, private presupuestoService: PresupuestoService,
+  constructor(private simularService: SimulacionService, private pdfService:PdfService,
     private simulacionService:SimulacionService) {
     
    }
@@ -76,6 +77,10 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   ngOnInit() {
     //this.cargarDatos();
     //this.getDatosPresupuesto();
+  }
+
+  descargarPdf(){
+    this.pdfService.downloadPDF();
   }
   
   ngAfterContentInit(): void {
