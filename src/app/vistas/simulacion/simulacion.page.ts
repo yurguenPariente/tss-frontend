@@ -4,13 +4,13 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { PresupuestoService } from '../services/presupuesto.service';
 import { SimulacionService } from '../services/simulacion.service';
+import { PdfService } from '../services/pdf.service';
 @Component({
   selector: 'app-simulacion',
   templateUrl: './simulacion.page.html',
   styleUrls: ['./simulacion.page.scss'],
 })
 export class SimulacionPage implements OnInit, AfterContentInit {
-  tir:any = 0;
   datos:number[] = [];
   norma: number[] = [];
   arreglo:number[] = [];
@@ -18,7 +18,8 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   ingresos:number[] = [];
   costos: number [] = [];
   label:Label[] = [];
-
+  van:number = 0;
+  tirO:number = 0;
   labelTir: Label[] = [];
   iteraciones: Label[] = [];
   mediaTir: number;
@@ -28,7 +29,6 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   arregloTirs: number[] =[];
   exito:number = 0;
   fracaso: number = 0;
-  array: number[] = [];
   media:number = 0;
   desviacion:number = 0;
   public barChartOptions: ChartOptions = {
@@ -52,23 +52,10 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   public barChartData3: ChartDataSets[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
-  miFormulario: FormGroup;
-  miFormulario2: FormGroup;
-  resultados: any = "0";
-  resultadosSim: any = [0,0,0,0];
-  apFlag: boolean = false;
   titulo: string = "Resultados de la simulacion"
 
-  proyecto: any = {
-    invInicial: 0,
-    ganancias:0,
-    salarios:0,
-    gastosBasicos:0
-  }
-  anhos: any = {
-    anhosDelProyecto:0
-  }
-  constructor(private fb: FormBuilder, private simularService: SimulacionService, private presupuestoService: PresupuestoService,
+  
+  constructor( private pdfService:PdfService,
     private simulacionService:SimulacionService) {
     
    }
@@ -76,6 +63,10 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   ngOnInit() {
     //this.cargarDatos();
     //this.getDatosPresupuesto();
+  }
+
+  descargarPdf(){
+    this.pdfService.downloadPDF();
   }
   
   ngAfterContentInit(): void {
@@ -100,94 +91,13 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     this.barChartLabels3 = this.labelTir;
   }
 
-  // cargarDatos(){
-  //   const servicios = JSON.parse(localStorage.getItem('ventasMes'));
-  //   const inver = Number(localStorage.getItem('inver'));
-  //   const costosop = JSON.parse(localStorage.getItem('CostoOp'));
-  //   this.miFormulario = this.fb.group({
-  //     invInicial:[inver, Validators.required],
-  //     ganancias:[servicios.total,[Validators.required]],
-  //     salarios:[costosop.PagoaEmpleados,[Validators.required]],      
-  //     gastosBasicos:[this.sumarGastos(),[Validators.required]],      
-  //   });
 
-  //   this.miFormulario2 = this.fb.group({
-  //     anhosDelProyecto:[this.anhos.anhosDelProyecto,[Validators.required]], 
-  //   })
-  // }
-  // getDatosPresupuesto(){
-  //   let pres = JSON.parse(localStorage.getItem('presupuesto'));
-  //   console.log(pres);
-  // }
-  // sumarGastos(): number{
-  //   const local = localStorage.getItem('CostoOp');
-  //   if(local){
-  //     const localob = JSON.parse(local);
-  //     return localob.ServiciodeLuz + localob.ServiciodeAgua + localob.ServiciodeGas + 
-  //     localob.ServiciodeTelefono + localob.ServiciodeInternet;
-  //   }
-  // }
+ 
+ 
+  
+ 
 
-  simular() {
-    this.apFlag = false;
-    this.titulo = "Resultados de la simulacion";
-    this.proyecto = {
-      invInicial :this.miFormulario.get('invInicial').value,
-      ganancias : this.miFormulario.get('ganancias').value,
-      salarios:this.miFormulario.get('salarios').value,
-      gastosBasicos: this.miFormulario.get('gastosBasicos').value,    
-    } 
-    //console.log(this.proyecto);
-    this.resultadosSim = this.simularService.simular(this.miFormulario.get('invInicial').value, this.miFormulario.get('ganancias').value, 
-      this.miFormulario.get('salarios').value, this.miFormulario.get('gastosBasicos').value);
-    this.resultados =this.resultadosSim[0];
-    /*this.resultados = this.simularService.simularAnhosParaRentable(this.miFormulario.get('invInicial').value, this.miFormulario.get('ganancias').value, 
-      this.miFormulario.get('salarios').value, this.miFormulario.get('gastosBasicos').value);*/
-  }
-
-  toggle(){
-    this.resultados = "";
-    this.titulo = "Resultados sin simular";
-    this.apFlag = !this.apFlag;
-  }
-  sinSimulacion(){
-    this.resultados = "";
-    var flujos = new Array();
-    for (let i = 0; i < this.miFormulario2.get('anhosDelProyecto').value; i++) {      
-      flujos.push(this.miFormulario.get('ganancias').value-(this.miFormulario.get('ganancias').value/4)-this.miFormulario.get('salarios').value
-      -this.miFormulario.get('gastosBasicos').value);
-    }  
-
-    let van = this.simularService.van(this.miFormulario.get('invInicial').value, flujos, 0.03)
-
-    /*if( van >= 0){
-      this.resultados="Sin simular, si se realiza el proyecto durante "+ this.miFormulario2.get('anhosDelProyecto').value 
-      + " años el proyecto sera rentable con un VAN de " + van;
-    } else {
-      this.resultados="Sin simular, si se realiza el proyecto durante "+ this.miFormulario2.get('anhosDelProyecto').value 
-      +" años el proyecto no sera rentable con un VAN de "+ van;
-    }  */
-    this.resultados = van;  
-  }
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public randomize(): void {
-    // Only Change 3 values
-    this.barChartData[0].data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40 ];
-  }
+  
   calcularVan(): number{
     if(localStorage.getItem('ventasMes') && localStorage.getItem('costosAnual') && localStorage.getItem('CostoOp')){
 
@@ -195,7 +105,9 @@ export class SimulacionPage implements OnInit, AfterContentInit {
       const costosA  = Number(localStorage.getItem('costosAnual'));
       const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
       //this.calcularTir(total, costosA,totalGas);
-      return this.simulacionService.van2(0,0.1150,(total-costosA)-((totalGas)*12)-60361);
+      const van = this.simulacionService.van2(0,0.1150,(total-costosA)-((totalGas)*12)-60361);
+      this.van = van;
+      return van;
     }
   }
   calcularTir(){ 
@@ -204,7 +116,9 @@ export class SimulacionPage implements OnInit, AfterContentInit {
       const costosA  = Number(localStorage.getItem('costosAnual'));
       const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;   
       //this.tir = this.simulacionService.tir((total-costosA)-((totalGas-1000)*12)-60361);      
-      return this.simulacionService.tir((total-costosA)-((totalGas)*12)-60361);
+      const tir = this.simulacionService.tir((total-costosA)-((totalGas)*12)-60361);
+      this.tirO = Number(tir);
+      return tir;
     }   
     // El primer valor es la inversion inicial 
   }
@@ -294,5 +208,47 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     this.normalizarDatos(this.normaTir,this.mediaTir,this.desviacionTir,this.arregloTirs);
     this.convertirDatosenLabel(this.normaTir,this.labelTir);
   }    
+
+  generarInforme(){
+    let res = "";
+    if(this.van>0){
+      res += "El VAN Original es MAYOR a 0 por lo que el negocio puede ser interesante. "
+    }else{
+      res += "El VAN Original es MENOR a 0 por lo que el negocio no es interesante. "
+    }
+    if(this.tirO > 11.50 ){
+      res += "El TIR Original es MAYOR a la tasa de referencia descuento (11.50 %) por lo que el negocio puede ser factible. "
+    }else{
+      res += "El TIR Original es MENOR a la tasa de referencia descuento (11.50 %) por lo que el negocio no es factible. "
+    }
+    return res;
+  }
+  generarInformeSimu(){
+    let res = "";
+    if(this.exito > this.fracaso){
+      res +=`La simulacion dio como resultado una mayor cantidad de exitos (${this.exito}) que fracasos (${this.fracaso}) por lo que el negocio es
+      interesante. `
+    }else{
+      res += `La simulacion dio como resultado una mayor cantidad de fracasos (${this.fracaso}) que exitos (${this.exito}) por lo que el negocio no es
+      interesante. `
+    }
+    if(this.media>0){
+      res += "Asi mismo la media de los resultados del VAN es MAYOR a 0 por lo que el negocio es interesante. "
+    }else{
+      res += "Asi mismo la media de los resultados del VAN es MENOR a 0 por lo que el negocio no es interesante. "
+    }
+    if(this.desviacion>this.media){
+      res += "Tambien se encontro que la desviacion estandar de los resultados del VAN es muy grande por lo que el negocio es riesgoso. "
+    }
+    if(this.mediaTir>11.50){
+      res += "Finalmente se detecto que la media de los resultados del TIR es MAYOR que la tasa de referencia de descuento (11.50 %) entonces el negocio es interesante, "
+    }else{
+      res += "Finalmente se detecto que la media de los resultados del TIR es MENOR que la tasa de referencia de descuento (11.50 %) entonces el negocio no es interesante, "
+    }
+    if(this.desviacionTir>this.mediaTir){
+      res += "Tambien se encontro que la desviacion estandar de los resultados del TIR es muy grande por lo que la tasa de retorno es muy variable. "
+    }
+    return res;
+  }
 
 }

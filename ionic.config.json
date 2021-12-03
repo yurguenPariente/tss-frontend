@@ -1,7 +1,10 @@
 {
   "name": "Plan de Negocio",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
   },
   "type": "angular"
 }
