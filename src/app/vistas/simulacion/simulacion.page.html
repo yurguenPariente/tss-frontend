@@ -7,8 +7,8 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content >
- 
+<ion-content>
+
     <h2 class="mt-3 text-center">Resultados de la simulacion</h2>
     <div id="htmlData">
         <div>
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div>
             <div>
                 <div style="display: block">
@@ -56,29 +56,29 @@
                     <ion-item>
                         <ion-label>Exitosos: {{ exito }} ({{ exito/10 }}%)</ion-label>
                     </ion-item>
-    
+
                     <ion-item>
                         <ion-label>Fallidos: {{ fracaso }} ({{ fracaso/10 }}%)</ion-label>
                     </ion-item>
-    
+
                     <ion-item>
                         <ion-label>Media VAN: {{media | number}}</ion-label>
                     </ion-item>
-    
+
                     <ion-item>
                         <ion-label>Desviacion VAN: {{desviacion | number}}</ion-label>
                     </ion-item>
-    
+
                     <ion-item>
                         <ion-label>Media TIR: {{mediaTir | number}} %</ion-label>
                     </ion-item>
-    
+
                     <ion-item>
                         <ion-label>Desviacion TIR: {{desviacionTir | number}} %</ion-label>
                     </ion-item>
-                  
+
                 </div>
-                <mat-card>
+                <mat-card style="text-align: justify;">
                     <hr>
                     <h4>Informe preliminar de datos sin simular</h4>
                     <span>{{generarInforme()}}</span>
@@ -87,8 +87,8 @@
                     <span>{{generarInformeSimu()}}</span>
                 </mat-card>
             </ion-list>
-        </div> 
+        </div>
     </div>
-   
+
     <button mat-flat-button color="primary" class="mt-2 me-4 mb-2 float-end" (click)="descargarPdf()">Descargar informe</button>
 </ion-content>
