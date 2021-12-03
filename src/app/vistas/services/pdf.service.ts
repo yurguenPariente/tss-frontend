@@ -6,35 +6,40 @@ import html2canvas from 'html2canvas';
 })
 export class PdfService {
   pdfObj:any;
+  generando: boolean = false;
   constructor() { }
 
   public downloadPDF(): void {
    // this.pdfObj = pdfMake.createPdf(docDefinition);
       const DATA = document.getElementById("htmlData");
       const doc = new jsPDF('p', 'pt', 'a4');
+      const date = new Date();
+      const fecha = date.toTimeString()
+      doc.text(`Resultados de la simulacion ${fecha}` ,10,10)
       const options = {
         background: 'black',
         scale: 2,
         orientation: "landscape",
         unit: "in",
-        format: [4, 2]
+        format: [2, 2]
       };
       html2canvas(DATA, options).then((canvas) => {
-  
+        this.generando=true;
       const img = canvas.toDataURL('image/PNG');
   
       // Add image Canvas to PDF
       const bufferX = 200;
-      const bufferY = 80;
+      const bufferY = 15;
       const imgProps = (doc as any).getImageProperties(img);
       const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
       doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      
       return doc;
     }).then((docResult) => {
-      window.open(docResult.output('bloburl'), '_blank');
+
       docResult.save(`${new Date().toISOString()}_tutorial.pdf`);
-      
+      window.location.reload();
     })
     }
   

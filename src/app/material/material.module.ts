@@ -7,7 +7,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatStepperModule} from '@angular/material/stepper'; 
 import {MatDialogModule} from '@angular/material/dialog'; 
 import {MatIconModule} from '@angular/material/icon'; 
-
+import {MatCardModule} from '@angular/material/card'; 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [],
   imports: [
@@ -16,11 +17,13 @@ import {MatIconModule} from '@angular/material/icon';
   exports:[
     MatButtonModule,
     MatInputModule,
+    MatCardModule,
     MatSelectModule,
     MatTableModule,
     MatStepperModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
     ]
 })
 export class MaterialModule { }

@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content >
+ 
     <h2 class="mt-3 text-center">Resultados de la simulacion</h2>
     <div id="htmlData">
         <div>
@@ -51,7 +52,7 @@
                 <ion-item>
                     <ion-label>TIR Original: {{ calcularTir() }}%</ion-label>
                 </ion-item>
-                <div *ngIf="!apFlag">
+                <div>
                     <ion-item>
                         <ion-label>Exitosos: {{ exito }} ({{ exito/10 }}%)</ion-label>
                     </ion-item>
@@ -75,11 +76,19 @@
                     <ion-item>
                         <ion-label>Desviacion TIR: {{desviacionTir | number}} %</ion-label>
                     </ion-item>
-    
+                  
                 </div>
+                <mat-card>
+                    <hr>
+                    <h4>Informe preliminar de datos sin simular</h4>
+                    <span>{{generarInforme()}}</span>
+                    <hr>
+                    <h4>Informe preliminar de datos simulados</h4>
+                    <span>{{generarInformeSimu()}}</span>
+                </mat-card>
             </ion-list>
         </div> 
     </div>
    
-    <button mat-flat-button color="primary" class="mt-2 me-2 mb-2" (click)="descargarPdf()">Descargar informe</button>
+    <button mat-flat-button color="primary" class="mt-2 me-4 mb-2 float-end" (click)="descargarPdf()">Descargar informe</button>
 </ion-content>
