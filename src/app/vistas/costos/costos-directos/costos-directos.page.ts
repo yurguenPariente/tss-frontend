@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { ModalPage } from '../../modal/modal.page';
 import { CostosService } from '../../services/costos.service';
+import { Costo } from '../../../interfaces/costos';
 
 interface CostosDirectos{
   nombre:string;
@@ -36,6 +37,7 @@ export class CostosDirectosPage implements OnInit{
   isLinear = false;
   FormGroups: FormGroup[] = [];
   nombres: string[] = [];
+  costos:number[] = [];
   constructor(public modalCtrl: ModalController, private _formBuilder: FormBuilder, private costosService:CostosService) { }
     
   ngOnInit() {
@@ -81,13 +83,39 @@ export class CostosDirectosPage implements OnInit{
   guardarLocal(){
     localStorage.setItem('costosAnual',this.costosAnual().toString())
   }
-
+  guardarCostos(arreglo:number[]){
+    const mayor = Math.max(...arreglo);
+    const menor = Math.min(...arreglo);
+    const medio = arreglo.find(num => num!==mayor && num!==menor);
+    const costos: Costo = {
+      alto:Math.round(mayor),
+      medio:Math.round(medio),
+      bajo:Math.round(menor)
+    }
+    localStorage.setItem('costosM',JSON.stringify(costos));
+  }
   costosAnual(){
     const local  = localStorage.getItem('ventasMes');
     if(local){
       const {enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre} = JSON.parse(local);
-      return (enero*(1-this.mub/100)) + (febrero*(1-this.mub/100)) +(marzo*(1-this.mub/100)) +(abril*(1-this.mub/100)) +(mayo*(1-this.mub/100)) +(junio*(1-this.mub/100))+
-      (julio*(1-this.mub/100)) + (agosto*(1-this.mub/100)) +(septiembre*(1-this.mub/100)) +(octubre*(1-this.mub/100))+(noviembre*(1-this.mub/100)) +(diciembre*(1-this.mub/100))
+      const num = (1-this.mub/100);
+      const en = enero*num;
+      const feb = febrero*num;
+      const mar = marzo*num;
+      const ab = abril*num;
+      const may = mayo*num;
+      const jun = junio*num;
+      const jul = julio*num;
+      const ago = agosto*num;
+      const sep = septiembre*num;
+      const oct = octubre*num;
+      const nov = noviembre*num;
+      const dic = diciembre*num;
+      // return (enero*(1-this.mub/100)) + (febrero*(1-this.mub/100)) +(marzo*(1-this.mub/100)) +(abril*(1-this.mub/100)) +(mayo*(1-this.mub/100)) +(junio*(1-this.mub/100))+
+      // (julio*(1-this.mub/100)) + (agosto*(1-this.mub/100)) +(septiembre*(1-this.mub/100)) +(octubre*(1-this.mub/100))+(noviembre*(1-this.mub/100)) +(diciembre*(1-this.mub/100))
+      const arreglo = [...new Set([en,feb,mar,ab,may,jun,jul,ago,sep,oct,nov,dic])];
+      this.guardarCostos(arreglo);
+      return en+feb+mar+ab+may+jun+jul+ago+sep+oct+nov+dic;
     }
     
   }
