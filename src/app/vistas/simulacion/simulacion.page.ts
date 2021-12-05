@@ -71,7 +71,7 @@ export class SimulacionPage implements OnInit, AfterContentInit {
   
   ngAfterContentInit(): void {
     this.norma = [-3.0,-2.9,-2.8,-2.7,-2.6,-2.5,-2.4,-2.3,-2.2,-2.1,-2.0,-1.9,-1.8,-1.7,-1.6,-1.5,-1.4,-1.3,-1.2,-1.1,-1.0,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0];
-    this.simularVan();
+    this.simular();
     this.realizarNormalizacionDeDatos();
     this.realizarNormalizacionTir();
     this.barChartData = [
@@ -123,15 +123,15 @@ export class SimulacionPage implements OnInit, AfterContentInit {
     // El primer valor es la inversion inicial 
   }
  
-  simularVan(){
-    if(localStorage.getItem('ventasMes') && localStorage.getItem('costosAnual') && localStorage.getItem('CostoOp')){
+  simular(){
+    if(localStorage.getItem('ventasMes') && localStorage.getItem('costosAnual') && localStorage.getItem('CostoOp') && localStorage.getItem('costosM')){
 
       const {alta,media,baja} = JSON.parse(localStorage.getItem('ventasMes'));
+      const {alto,medio,bajo} = JSON.parse(localStorage.getItem('costosM'))
       const totalGas  = JSON.parse(localStorage.getItem('CostoOp')).total;
-      const costosA  = Number(localStorage.getItem('costosAnual'));
       for(let i=0; i<1000;i++){
         let ingresos = this.simulacionService.simularNuevo2(Number(baja),Number(alta),Number(media));
-        let costos = this.simulacionService.simularNuevo2(536,1072,804);
+        let costos = this.simulacionService.simularNuevo2(Number(bajo),Number(alto),Number(medio));
         let simu = this.simulacionService.van2(0,0.1150,(ingresos-costos)-((totalGas)*12)-60361);
         let tir = this.simulacionService.tir((ingresos-costos)-((totalGas)*12)-60361);
         this.tirs.push(Number(tir));

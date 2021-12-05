@@ -29,7 +29,7 @@ export class PdfService {
   
       // Add image Canvas to PDF
       const bufferX = 200;
-      const bufferY = 15;
+      const bufferY = 13;
       const imgProps = (doc as any).getImageProperties(img);
       const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
