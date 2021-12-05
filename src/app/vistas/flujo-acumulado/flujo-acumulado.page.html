@@ -62,9 +62,14 @@
     <!-- Position Column -->
     <ng-container matColumnDef=" ">
       <th mat-header-cell *matHeaderCellDef>   </th>
-      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      <td mat-cell *matCellDef="let element"><span *ngIf="element.nombre==='Costos de produccion' || element.nombre==='Ingresos'; else normal">
+        {{element.nombre}} <small style="color:red;" class="ms-3">E I P S</small></span> 
+        <ng-template #normal>
+          {{element.nombre}}
+        </ng-template>
+      </td>
+   
     </ng-container>
-  
     <!-- Name Column -->
     <ng-container matColumnDef="Total Anual">
       <th mat-header-cell *matHeaderCellDef class="text-center"> Total Anual </th>
@@ -74,8 +79,9 @@
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
   </table>
-
+  <small class="ms-2"> <b>E I P S </b>: Elemento importante para la simulacion</small>
 
   <button mat-flat-button color="primary" (click)="guardar()" routerLink='/vistas/simulacion' class="m-3 float-end">Realizar Simulacion</button>
 

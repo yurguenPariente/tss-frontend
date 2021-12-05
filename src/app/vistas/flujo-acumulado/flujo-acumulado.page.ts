@@ -74,7 +74,8 @@ export class FlujoAcumuladoPage implements OnInit, AfterContentInit {
       tipo:[this.flujo.tipo, [Validators.required,Validators.max(1000000)]],
       tasa:[this.flujo.tasa*100, [Validators.required,Validators.max(1000000)]],
       plazo: [this.flujo.plazo,[Validators.required,Validators.max(1000000)]]
-    })
+    });
+    this.encontrarCuota()
   }
   guardar(){
     this.flujo = {

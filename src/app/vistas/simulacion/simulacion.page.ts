@@ -1,8 +1,6 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { PresupuestoService } from '../services/presupuesto.service';
 import { SimulacionService } from '../services/simulacion.service';
 import { PdfService } from '../services/pdf.service';
 @Component({
