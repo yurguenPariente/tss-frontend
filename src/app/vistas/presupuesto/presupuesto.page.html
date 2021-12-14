@@ -88,7 +88,7 @@
             </form>
             <div class="mb-3">Total: {{sumarTotal1() | number}}</div>
             <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
-            <button mat-flat-button color="primary" class="float-end" matStepperNext (click)="guardarEfectivo()">Siguiente</button>
+            <button mat-flat-button color="primary" class="float-end" matStepperNext (click)="guardarEfectivo()">Guardar y continuar</button>
         </mat-step>
 
         <mat-step>
@@ -120,7 +120,7 @@
                 <app-capital [indice]='1' [aporte]="false" tipo="operativos"></app-capital>
             </div>
             <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
-            <button mat-flat-button color="primary" class="float-end" matStepperNext>Siguiente</button>
+            <button mat-flat-button color="primary" class="float-end" matStepperNext>Guardar y continuar</button>
         </mat-step>
 
         <mat-step>
@@ -158,7 +158,7 @@
                 <app-capital [indice]='2' tipo="legales"></app-capital>
             </div>
             <button mat-flat-button color="primary" class="me-2" matStepperPrevious>Atras</button>
-            <button mat-flat-button color="primary" class="float-end" matStepperNext>Siguiente</button>
+            <button mat-flat-button color="primary" class="float-end" matStepperNext>Guardar y continuar</button>
         </mat-step>
 
         <mat-step>
